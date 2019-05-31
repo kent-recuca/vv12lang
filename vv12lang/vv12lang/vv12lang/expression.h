@@ -16,6 +16,12 @@ namespace vv12 {
 		subAssExp,
 		mulAssExp,
 		divAssExp,
+		eqExp,
+		neExp,
+		gtExp,
+		geExp,
+		ltExp,
+		leExp,
 		addExp,
 		subExp,
 		mulExp,
@@ -153,6 +159,24 @@ namespace vv12 {
 		struct Impl;
 		Impl* pImpl;
 	};
+
+	//--------------------------------------------------------------------------------------
+///  関係式クラス
+//--------------------------------------------------------------------------------------
+	class RelationalExp : public Expression {
+	public:
+		RelationalExp(ExpressionType type, const Expression* left, const Expression* right);
+		virtual ~RelationalExp();
+		const Expression* getLeft()const;
+		const Expression* getRight()const;
+		virtual Value Excute() const  override;
+	private:
+		// pImplイディオム
+		struct Impl;
+		Impl* pImpl;
+	};
+
+
 
 
 }

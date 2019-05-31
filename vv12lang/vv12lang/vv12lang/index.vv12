@@ -2,11 +2,16 @@
 ecn ^a
 ecn "hello
 world!!"
-{
-ecn "T" 
-}
 ^b = 5
-while(1){
+while(^b<=10){
 ecn ^b
-^b = 1
+^b += 1
+	if(^b == 8){
+		ecn "IF!"
+	}
 }
+for(^i=0
+;^i<10;^i+=1){
+ecn "for"
+}
+

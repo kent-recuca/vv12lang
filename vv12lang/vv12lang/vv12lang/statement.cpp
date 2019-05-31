@@ -123,6 +123,45 @@ namespace vv12 {
 	}
 
 	//--------------------------------------------------------------------------------------
+///  if文クラス
+//--------------------------------------------------------------------------------------
+	struct IfStm::Impl {
+		const Expression* m_Condition;
+		const Statement* m_Statement;
+	};
+
+	IfStm::IfStm(const Expression* condition, const Statement* stm)
+		: Statement(StatementType::ifStm),
+		pImpl(new Impl)
+	{
+		pImpl->m_Condition = condition;
+		pImpl->m_Statement = stm;
+	}
+
+	IfStm::~IfStm() {
+		delete pImpl;
+
+	}
+
+	const Expression* IfStm::getCondition()const {
+		return pImpl->m_Condition;
+	}
+
+	const Statement* IfStm::getStatement()const {
+		return pImpl->m_Statement;
+	}
+
+	SmtRes IfStm::Excute() const {
+		setRuntimeLineNumber();
+		auto val = getCondition()->Excute();
+		if (val.getBool()) {
+			return getStatement()->Excute();
+		}
+		return SmtRes();
+	}
+
+
+	//--------------------------------------------------------------------------------------
 ///  while文クラス
 //--------------------------------------------------------------------------------------
 	struct WhileStm::Impl {
@@ -164,6 +203,62 @@ namespace vv12 {
 		Interpreter::getInp()->popBreak();
 		return SmtRes();
 	}
+
+	//--------------------------------------------------------------------------------------
+///  for文クラス
+//--------------------------------------------------------------------------------------
+	struct ForStm::Impl {
+		const Statement* m_InitStatement;
+		const Expression* m_Condition;
+		const Expression* m_Post;
+		const Statement* m_Statement;
+	};
+
+	ForStm::ForStm(const Statement* initstm, const Expression* condition, const Expression* post,
+		const Statement* stm)
+		: Statement(StatementType::forStm),
+		pImpl(new Impl)
+	{
+		pImpl->m_InitStatement = initstm;
+		pImpl->m_Condition = condition;
+		pImpl->m_Post = post;
+		pImpl->m_Statement = stm;
+	}
+
+	ForStm::~ForStm() {
+		delete pImpl;
+
+	}
+
+	const Statement* ForStm::getInitStatement()const {
+		return pImpl->m_InitStatement;
+	}
+
+	const Expression* ForStm::getCondition()const {
+		return pImpl->m_Condition;
+	}
+	const Expression* ForStm::getPost()const {
+		return pImpl->m_Post;
+	}
+
+	const Statement* ForStm::getStatement()const {
+		return pImpl->m_Statement;
+	}
+
+	SmtRes ForStm::Excute() const {
+		setRuntimeLineNumber();
+		Interpreter::getInp()->pushBreak();
+		Interpreter::getInp()->pushLoop();
+		for (getInitStatement()->Excute();
+			getCondition()->Excute().getBool();
+			getPost()->Excute()) {
+			auto res = getStatement()->Excute();
+		}
+		Interpreter::getInp()->popLoop();
+		Interpreter::getInp()->popBreak();
+		return SmtRes();
+	}
+
 
 
 	//--------------------------------------------------------------------------------------

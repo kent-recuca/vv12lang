@@ -16,6 +16,12 @@ int yywrap(void){ return 1; }
     "/="    return DIVASS;
     "+="    return ADDASS;
     "-="    return SUBASS;
+	"=="    return EQ;
+	"!="    return NE;
+    "<="    return LE;
+    ">="    return GE;
+    "<"     return LT;
+    ">"     return GT;
     "+"     return ADD;
     "-"     return SUB;
     "*"     return MUL;
@@ -25,7 +31,10 @@ int yywrap(void){ return 1; }
     ")"     return RP;
 	"{"     return LC;
     "}"     return RC;
+	";"     return SEMICOLON;
 	"while"   return WHILE;
+	"if"    return IF;
+	"for"   return FOR;
     "ecn"    return PRINTN;
     "ec"     return PRINT;
     "#*"   { BEGIN(COMMENT);}

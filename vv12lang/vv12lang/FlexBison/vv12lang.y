@@ -23,8 +23,8 @@ int yyerror(char const *str){
 }
 %token <fixedString> IDENTIFIER
 %token <expression>  INT_LITERAL DOUBLE_LITERAL STR_LITERAL
-%token CRLF ADD SUB MUL DIV
-%token MULASS DIVASS  ADDASS SUBASS ASS PRINTN PRINT WHILE
+%token CRLF ADD SUB MUL DIV EQ NE LT GT LE GE SEMICOLON
+%token MULASS DIVASS  ADDASS SUBASS ASS PRINTN PRINT WHILE IF FOR
 %token LC RC LP RP
 %right ASS 
 %right ADDASS SUBASS
@@ -33,8 +33,8 @@ int yyerror(char const *str){
 %left MUL DIV
 %type <expression> constart_expression identifier_expression 
 %type <expression> primary_expression mul_expression add_expression
-%type <expression> assign_expression expression
-%type <statement> expression_statement internal_statement statement compound_statement iteration_statement
+%type <expression> assign_expression expression equality_expression relational_expression
+%type <statement> expression_statement internal_statement statement compound_statement iteration_statement selection_statement
 %type <statementList> statement_list
 %type <root> root
 %%
@@ -57,6 +57,7 @@ statement_list
 statement
     : expression_statement
 	| compound_statement
+	| selection_statement
 	| iteration_statement
     | internal_statement
     ;
@@ -80,10 +81,20 @@ compound_statement
         $$ = vv12::Interpreter::getInp()->createStatement<vv12::BlockStm>($2);
     }
     ;
+selection_statement
+    : IF LP expression RP statement
+    {
+        $$ = vv12::Interpreter::getInp()->createStatement<vv12::IfStm>($3,$5);
+    }
+	;
 iteration_statement
     : WHILE LP expression RP statement
     {
         $$ = vv12::Interpreter::getInp()->createStatement<vv12::WhileStm>($3,$5);
+    }
+	| FOR LP statement SEMICOLON expression SEMICOLON expression RP statement
+    {
+        $$ = vv12::Interpreter::getInp()->createStatement<vv12::ForStm>($3,$5,$7,$9);
     }
 	;
 internal_statement
@@ -100,7 +111,7 @@ expression
     : assign_expression
     ;
 assign_expression
-    : add_expression
+    : equality_expression
     | identifier_expression ASS assign_expression
     {
         $$ = vv12::Interpreter::getInp()->createAssExp($1,$3);
@@ -120,6 +131,36 @@ assign_expression
     | identifier_expression DIVASS assign_expression
     {
         $$ = vv12::Interpreter::getInp()->createToAssExp($1,$3, vv12::ExpressionType::divAssExp);
+    }
+    ;
+equality_expression
+    : relational_expression
+    | equality_expression EQ relational_expression
+    {
+        $$ = vv12::Interpreter::getInp()->createRelationalExp($1,$3,vv12::ExpressionType::eqExp);
+    }
+	| equality_expression NE relational_expression
+    {
+        $$ = vv12::Interpreter::getInp()->createRelationalExp($1,$3,vv12::ExpressionType::neExp);
+    }
+	;
+relational_expression
+    : add_expression
+    | relational_expression LT add_expression
+    {
+        $$ = vv12::Interpreter::getInp()->createRelationalExp($1,$3,vv12::ExpressionType::ltExp);
+    }
+    | relational_expression GT add_expression
+    {
+        $$ = vv12::Interpreter::getInp()->createRelationalExp($1,$3,vv12::ExpressionType::gtExp);
+    }
+    | relational_expression LE add_expression
+    {
+        $$ = vv12::Interpreter::getInp()->createRelationalExp($1,$3,vv12::ExpressionType::leExp);
+    }
+    | relational_expression GE add_expression
+    {
+        $$ = vv12::Interpreter::getInp()->createRelationalExp($1,$3,vv12::ExpressionType::geExp);
     }
     ;
 add_expression

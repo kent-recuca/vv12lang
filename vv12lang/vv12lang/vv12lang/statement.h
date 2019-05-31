@@ -9,6 +9,8 @@ namespace vv12 {
 		nullStm,
 		expressionStm,
 		whileStm,
+		ifStm,
+		forStm,
 		blockStm,
 		printStm,
 		stmTypeCount
@@ -92,6 +94,23 @@ namespace vv12 {
 	};
 
 	//--------------------------------------------------------------------------------------
+///  if文クラス
+//--------------------------------------------------------------------------------------
+	class IfStm : public Statement {
+	public:
+		IfStm(const Expression* condition, const Statement* stm);
+		virtual ~IfStm();
+		const Expression* getCondition()const;
+		const Statement* getStatement()const;
+		virtual SmtRes Excute() const  override;
+	private:
+		// pImplイディオム
+		struct Impl;
+		Impl* pImpl;
+	};
+
+
+	//--------------------------------------------------------------------------------------
 ///  while文クラス
 //--------------------------------------------------------------------------------------
 	class WhileStm : public Statement {
@@ -106,6 +125,25 @@ namespace vv12 {
 		struct Impl;
 		Impl* pImpl;
 	};
+
+	//--------------------------------------------------------------------------------------
+///  for文クラス
+//--------------------------------------------------------------------------------------
+	class ForStm : public Statement {
+	public:
+		ForStm(const Statement* initstm, const Expression* condition, const Expression* post, const Statement* stm);
+		virtual ~ForStm();
+		const Statement* getInitStatement()const;
+		const Expression* getCondition()const;
+		const Expression* getPost()const;
+		const Statement* getStatement()const;
+		virtual SmtRes Excute() const  override;
+	private:
+		// pImplイディオム
+		struct Impl;
+		Impl* pImpl;
+	};
+
 
 
 	//--------------------------------------------------------------------------------------

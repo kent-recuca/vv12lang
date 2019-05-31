@@ -60,18 +60,27 @@ extern int yydebug;
     SUB = 264,
     MUL = 265,
     DIV = 266,
-    MULASS = 267,
-    DIVASS = 268,
-    ADDASS = 269,
-    SUBASS = 270,
-    ASS = 271,
-    PRINTN = 272,
-    PRINT = 273,
-    WHILE = 274,
-    LC = 275,
-    RC = 276,
-    LP = 277,
-    RP = 278
+    EQ = 267,
+    NE = 268,
+    LT = 269,
+    GT = 270,
+    LE = 271,
+    GE = 272,
+    SEMICOLON = 273,
+    MULASS = 274,
+    DIVASS = 275,
+    ADDASS = 276,
+    SUBASS = 277,
+    ASS = 278,
+    PRINTN = 279,
+    PRINT = 280,
+    WHILE = 281,
+    IF = 282,
+    FOR = 283,
+    LC = 284,
+    RC = 285,
+    LP = 286,
+    RP = 287
   };
 #endif
 
@@ -88,7 +97,7 @@ union YYSTYPE
     vv12::StatementList* statementList;
     vv12::Root* root;
 
-#line 92 "vv12lang.tab.h" /* yacc.c:1913  */
+#line 101 "vv12lang.tab.h" /* yacc.c:1913  */
 };
 
 typedef union YYSTYPE YYSTYPE;

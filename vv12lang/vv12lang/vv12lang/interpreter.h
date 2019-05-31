@@ -37,6 +37,7 @@ namespace vv12 {
 		Expression* createIntLiteralExp(const char* ext);
 		Expression* createDoubleLiteralExp(const char* ext);
 		Expression* createBinaryExp(const Expression* left, const Expression* right, ExpressionType t);
+		Expression* createRelationalExp(const Expression* left, const Expression* right, ExpressionType t);
 		Expression* createAssExp(const Expression* ident, const Expression* right);
 		Expression* createToAssExp(const Expression* ident, const Expression* right, ExpressionType t);
 
