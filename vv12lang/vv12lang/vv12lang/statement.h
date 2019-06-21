@@ -12,12 +12,17 @@ namespace vv12 {
 		ifStm,
 		forStm,
 		blockStm,
+		continueStm,
+		breakStm,
+		returnStm,
 		printStm,
 		stmTypeCount
 	};
 
 	enum class SmtResType {
 		voidType,
+		continueType,
+		breakType,
 		returnTpe,
 	};
 
@@ -109,6 +114,25 @@ namespace vv12 {
 		Impl* pImpl;
 	};
 
+	//--------------------------------------------------------------------------------------
+///  ifelse文クラス
+//--------------------------------------------------------------------------------------
+	class IfElsStm : public Statement {
+	public:
+		IfElsStm(const Expression* condition, const Statement* stm, const Statement* elsstm);
+		virtual ~IfElsStm();
+		const Expression* getCondition()const;
+		const Statement* getStatement()const;
+		const Statement* getElsStatement()const;
+		virtual SmtRes Excute() const  override;
+	private:
+		// pImplイディオム
+		struct Impl;
+		Impl* pImpl;
+	};
+
+
+
 
 	//--------------------------------------------------------------------------------------
 ///  while文クラス
@@ -147,6 +171,30 @@ namespace vv12 {
 
 
 	//--------------------------------------------------------------------------------------
+	///  continue文クラス
+	//--------------------------------------------------------------------------------------
+	class ContinueStm : public Statement {
+	public:
+		ContinueStm();
+		virtual ~ContinueStm();
+		virtual SmtRes Excute() const  override;
+	};
+
+
+	//--------------------------------------------------------------------------------------
+///  break文クラス
+//--------------------------------------------------------------------------------------
+	class BreakStm : public Statement {
+	public:
+		BreakStm();
+		virtual ~BreakStm();
+		virtual SmtRes Excute() const  override;
+	};
+
+
+
+
+	//--------------------------------------------------------------------------------------
 ///  ブロック文クラス
 //--------------------------------------------------------------------------------------
 	class BlockStm : public Statement {
@@ -161,6 +209,58 @@ namespace vv12 {
 		struct Impl;
 		Impl* pImpl;
 	};
+
+	//--------------------------------------------------------------------------------------
+///  return文クラス
+//--------------------------------------------------------------------------------------
+	class ReturnStm : public Statement {
+	public:
+		ReturnStm();
+		ReturnStm(const Expression* retexp);
+		virtual ~ReturnStm();
+		const Expression* getRetExp()const;
+		virtual SmtRes Excute() const  override;
+	private:
+		// pImplイディオム
+		struct Impl;
+		Impl* pImpl;
+	};
+
+	//--------------------------------------------------------------------------------------
+///  パラメータリストクラス
+//--------------------------------------------------------------------------------------
+	class ParameterList : public ObjBase {
+	public:
+		ParameterList();
+		ParameterList(const char* ident);
+		virtual ~ParameterList();
+		const char* getIdent() const;
+		ParameterList* getNext()const;
+		void setNext(ParameterList* next);
+	private:
+		// pImplイディオム
+		struct Impl;
+		Impl* pImpl;
+	};
+
+
+
+
+	//--------------------------------------------------------------------------------------
+///  function定義クラス
+//--------------------------------------------------------------------------------------
+	class FunctionDefineStm : public Statement {
+	public:
+		FunctionDefineStm(const char* ident, const ParameterList* pml, const Statement* stm);
+		virtual ~FunctionDefineStm();
+		const ParameterList* getParamList() const;
+		virtual SmtRes Excute() const  override;
+	private:
+		// pImplイディオム
+		struct Impl;
+		Impl* pImpl;
+	};
+
 
 
 

@@ -32,11 +32,17 @@ int yywrap(void){ return 1; }
 	"{"     return LC;
     "}"     return RC;
 	";"     return SEMICOLON;
+	","		return COMMA;
 	"while"   return WHILE;
 	"if"    return IF;
+	"else"  return ELSE;
 	"for"   return FOR;
     "ecn"    return PRINTN;
     "ec"     return PRINT;
+	"break"   return BREAK;
+	"continue"	return CONTINUE;
+	"return"	return RETURN;
+	"func"   return FUNCTION;
     "#*"   { BEGIN(COMMENT);}
     [#]+ { BEGIN(LINE_COMMENT);}
 	"\""    {
@@ -55,6 +61,10 @@ int yywrap(void){ return 1; }
     [0-9]*\.[0-9]* {
         yylval.expression = vv12::Interpreter::getInp()->createDoubleLiteralExp(yytext);
         return DOUBLE_LITERAL;
+    }
+	"\$"[A-Za-z_][A-Za-z_0-9]* {
+        yylval.fixedString = vv12::Interpreter::getInp()->createFixedString(yytext);
+        return LOCAL_IDENTIFIER;
     }
     "^".[A-Za-z_0-9]* {
         yylval.fixedString = vv12::Interpreter::getInp()->createFixedString(yytext);

@@ -122,13 +122,15 @@ namespace vv12 {
 	//--------------------------------------------------------------------------------------
 	struct VariableExp::Impl {
 		const char*  m_VariableName;
+		bool m_Local;
 	};
 
-	VariableExp::VariableExp(const char* ident)
+	VariableExp::VariableExp(const char* ident, bool local)
 		:Expression(ExpressionType::variableExp),
 		pImpl(new Impl)
 	{
 		pImpl->m_VariableName = Interpreter::getInp()->createFixedString(ident);
+		pImpl->m_Local = local;
 	}
 
 	VariableExp::~VariableExp() {
@@ -139,8 +141,21 @@ namespace vv12 {
 		return pImpl->m_VariableName;
 	}
 
+	bool VariableExp::IsLocal() const {
+		return pImpl->m_Local;
+	}
+
+
 	Value& VariableExp::getVariableValue() const {
-		return Interpreter::getInp()->getGlobalValiableValue(pImpl->m_VariableName);
+		if (IsLocal()) {
+			return Interpreter::getInp()->getLocalValiableValue(pImpl->m_VariableName);
+		}
+		else {
+			if (Interpreter::getInp()->findLocalValiableValue(pImpl->m_VariableName)) {
+				return Interpreter::getInp()->getLocalValiableValue(pImpl->m_VariableName);
+			}
+			return Interpreter::getInp()->getGlobalValiableValue(pImpl->m_VariableName);
+		}
 	}
 
 	Value VariableExp::Excute() const {
@@ -363,6 +378,108 @@ namespace vv12 {
 		}
 		Interpreter::getInp()->runtimeExit(2004);
 		return Value();
+	}
+
+	//--------------------------------------------------------------------------------------
+///  引数クラス
+//--------------------------------------------------------------------------------------
+	struct ArgumentList::Impl {
+		const Expression* m_Expression;
+		ArgumentList* m_Next;
+	};
+
+	ArgumentList::ArgumentList() :
+		ObjBase(ObjType::ParamListType),
+		pImpl(new Impl)
+	{
+		pImpl->m_Expression = nullptr;
+		pImpl->m_Next = nullptr;
+	}
+
+	ArgumentList::ArgumentList(const Expression* exp) :
+		ObjBase(ObjType::ParamListType),
+		pImpl(new Impl)
+	{
+		pImpl->m_Expression = exp;
+		pImpl->m_Next = nullptr;
+	}
+
+	ArgumentList::~ArgumentList() {
+		delete pImpl;
+	}
+
+	const Expression* ArgumentList::getExp() const {
+		//nullptrの場合あり
+		return pImpl->m_Expression;
+	}
+
+	ArgumentList* ArgumentList::getNext()const {
+		return pImpl->m_Next;
+	}
+
+	void ArgumentList::setNext(ArgumentList* next) {
+		pImpl->m_Next = next;
+	}
+
+	//--------------------------------------------------------------------------------------
+	///  関数呼び出し式クラス
+	//--------------------------------------------------------------------------------------
+	struct FunctionCallExp::Impl {
+		const char* m_Identifier;
+		const ArgumentList* m_Argument;
+		const FunctionDefineStm* m_FuncDef;
+	};
+
+	FunctionCallExp::FunctionCallExp(const char* ident, const ArgumentList* args, const FunctionDefineStm* funcDef)
+		:Expression(ExpressionType::functionExp),
+		pImpl(new Impl)
+	{
+		pImpl->m_Identifier = Interpreter::getInp()->createFixedString(ident);
+		pImpl->m_Argument = args;
+		pImpl->m_FuncDef = funcDef;
+	}
+
+	FunctionCallExp::~FunctionCallExp() {
+		delete pImpl;
+	}
+	const char* FunctionCallExp::getIdentifier()const {
+		//nullptrの場合あり
+		return pImpl->m_Identifier;
+	}
+
+	Value FunctionCallExp::Excute() const {
+		//関数呼び出しはは一つ階層を下がる
+		Interpreter::getInp()->pushRuntime(true);
+		//引数リストをローカル変数に作成
+		auto argList = pImpl->m_Argument;
+		auto paramlist = pImpl->m_FuncDef->getParamList();
+		while (argList) {
+			if (!paramlist) {
+				//パラメータリストがなかった。
+				//行き数の数がパラメータ数を上回っている。
+				Interpreter::getInp()->runtimeExit(2013);
+			}
+			if (paramlist->getIdent()) {
+				if (argList->getExp()) {
+					Value& v = Interpreter::getInp()->getLocalValiableValue(paramlist->getIdent());
+					v = argList->getExp()->Excute();
+				}
+				else {
+					break;
+				}
+			}
+			else {
+				//パラメータリストがなかった。
+				//行き数の数がパラメータ数を上回っている。
+				Interpreter::getInp()->runtimeExit(2013);
+			}
+			argList = argList->getNext();
+			paramlist = paramlist->getNext();
+		}
+		auto val = pImpl->m_FuncDef->Excute().m_RetValue;
+		//終了前に一つ階層を上がる
+		Interpreter::getInp()->popRuntime();
+		return val;
 	}
 
 

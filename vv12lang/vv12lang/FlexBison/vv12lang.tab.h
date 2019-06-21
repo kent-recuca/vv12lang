@@ -52,35 +52,42 @@ extern int yydebug;
   enum yytokentype
   {
     IDENTIFIER = 258,
-    INT_LITERAL = 259,
-    DOUBLE_LITERAL = 260,
-    STR_LITERAL = 261,
-    CRLF = 262,
-    ADD = 263,
-    SUB = 264,
-    MUL = 265,
-    DIV = 266,
-    EQ = 267,
-    NE = 268,
-    LT = 269,
-    GT = 270,
-    LE = 271,
-    GE = 272,
-    SEMICOLON = 273,
-    MULASS = 274,
-    DIVASS = 275,
-    ADDASS = 276,
-    SUBASS = 277,
-    ASS = 278,
-    PRINTN = 279,
-    PRINT = 280,
-    WHILE = 281,
-    IF = 282,
-    FOR = 283,
-    LC = 284,
-    RC = 285,
-    LP = 286,
-    RP = 287
+    LOCAL_IDENTIFIER = 259,
+    INT_LITERAL = 260,
+    DOUBLE_LITERAL = 261,
+    STR_LITERAL = 262,
+    CRLF = 263,
+    ADD = 264,
+    SUB = 265,
+    MUL = 266,
+    DIV = 267,
+    EQ = 268,
+    NE = 269,
+    LT = 270,
+    GT = 271,
+    LE = 272,
+    GE = 273,
+    SEMICOLON = 274,
+    COMMA = 275,
+    MULASS = 276,
+    DIVASS = 277,
+    ADDASS = 278,
+    SUBASS = 279,
+    ASS = 280,
+    PRINTN = 281,
+    PRINT = 282,
+    WHILE = 283,
+    IF = 284,
+    ELSE = 285,
+    FOR = 286,
+    BREAK = 287,
+    CONTINUE = 288,
+    RETURN = 289,
+    FUNCTION = 290,
+    LC = 291,
+    RC = 292,
+    LP = 293,
+    RP = 294
   };
 #endif
 
@@ -95,9 +102,11 @@ union YYSTYPE
     vv12::Expression* expression;
     vv12::Statement* statement;
     vv12::StatementList* statementList;
+	vv12::ParameterList* parameterList;
+	vv12::ArgumentList* argumentList;
     vv12::Root* root;
 
-#line 101 "vv12lang.tab.h" /* yacc.c:1913  */
+#line 110 "vv12lang.tab.h" /* yacc.c:1913  */
 };
 
 typedef union YYSTYPE YYSTYPE;

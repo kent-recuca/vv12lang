@@ -10,6 +10,7 @@ namespace vv12 {
 		ExpType,
 		StmType,
 		StmListType,
+		ParamListType,
 		RootType,
 		InterpreterType,
 		objTypeCount

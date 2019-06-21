@@ -40,7 +40,9 @@ namespace vv12 {
 			auto pos = pImpl->m_StatementList;
 			do {
 				auto stm = pos->getStm();
-				stm->Excute();
+				if (typeid(*stm) != typeid(FunctionDefineStm)) {
+					stm->Excute();
+				}
 				pos = pos->getNext();
 			} while (pos);
 		}
@@ -81,6 +83,8 @@ namespace vv12 {
 		set<string> m_FixedStringPool;
 		vector<ObjBase*> m_ObjectPool;
 		map<string, string> m_ConfigMap;
+		map<string, FunctionDefineStm*> m_FunctionMap;
+
 		//文字列リテラル作成用
 		string m_LiteralTemp;
 		//ランタイムエラー用テンポラリ
@@ -92,6 +96,8 @@ namespace vv12 {
 		map<int, string> m_ErrMap;
 		//警告を表示するかどうか
 		bool m_IsWorningOut;
+		//今関数の実行中かどうか
+		bool m_FunctionRuntime;
 		//ランタイム中の行番号
 		int m_RuntimeLineNumber;
 		//breakの深さ
@@ -144,7 +150,7 @@ namespace vv12 {
 		pImpl->m_RuntimeLineNumber = 1;
 		pImpl->m_TempVal = Value();
 		pImpl->m_ConfigMap["calc_epsilon"] = "0.000001";
-		//pImpl->m_FunctionRuntime = false;
+		pImpl->m_FunctionRuntime = false;
 		pImpl->m_BreakDeps = 0;
 		pImpl->m_LoopDeps = 0;
 	}
@@ -165,13 +171,14 @@ namespace vv12 {
 	void Interpreter::Exec()const {
 		if (pImpl->m_Root) {
 			pImpl->m_CurrentRuntime = make_shared<RuntimeObject>(nullptr);
-			pImpl->m_RootRuntime = make_shared<RuntimeObject>(nullptr);
+			pImpl->m_RootRuntime = pImpl->m_CurrentRuntime;
 			pImpl->m_Root->Excute();
 		}
 		else {
 			Interpreter::getInp()->runtimeExit(2001);
 		}
 	}
+
 
 	///１階層ランタイムをpushする
 	void Interpreter::pushRuntime(bool IsFunc) {
@@ -211,6 +218,30 @@ namespace vv12 {
 		}
 	}
 
+	//continue可能かどうか
+	bool Interpreter::isContinueOK() const {
+		if (pImpl->m_LoopDeps > 0) {
+			return true;
+		}
+		return false;
+	}
+
+
+	bool Interpreter::isBreakOK() const {
+		if (pImpl->m_BreakDeps > 0) {
+			return true;
+		}
+		return false;
+	}
+
+	void Interpreter::setFunctionRuntime(bool b) {
+		pImpl->m_FunctionRuntime = b;
+
+	}
+
+	bool Interpreter::isFunctionRuntime() const {
+		return pImpl->m_FunctionRuntime;
+	}
 
 
 	void Interpreter::Delete() {
@@ -251,9 +282,9 @@ namespace vv12 {
 		return it.first->c_str();
 	}
 
-	Expression* Interpreter::createVariableExp(const char* ident) {
+	Expression* Interpreter::createVariableExp(const char* ident, bool isLocal) {
 		string str = clampToken(ident);
-		auto ptr = new VariableExp(str.c_str());
+		auto ptr = new VariableExp(str.c_str(),isLocal);
 		pImpl->m_ObjectPool.push_back(ptr);
 		return ptr;
 	}
@@ -297,6 +328,43 @@ namespace vv12 {
 		return ptr;
 	}
 
+	ArgumentList* Interpreter::createArgumentList() {
+		auto ptr = new ArgumentList();
+		pImpl->m_ObjectPool.push_back(ptr);
+		return ptr;
+	}
+
+	ArgumentList* Interpreter::createArgumentList(const Expression* exp) {
+		auto ptr = new ArgumentList(exp);
+		pImpl->m_ObjectPool.push_back(ptr);
+		return ptr;
+
+	}
+
+	ArgumentList* Interpreter::createArgumentList(ArgumentList* agl, const Expression* exp) {
+		ArgumentList* pos;
+		if (agl == nullptr)
+			return createArgumentList(exp);
+		for (pos = agl; pos->getNext(); pos = pos->getNext())
+			;
+		pos->setNext(createArgumentList(exp));
+		return agl;
+	}
+
+
+	Expression* Interpreter::createFunctionCallExp(const char* ident, const ArgumentList* args) {
+		extern int gLine;
+		auto it = pImpl->m_FunctionMap.find(ident);
+		if (it == pImpl->m_FunctionMap.end()) {
+			//その名前の関数がなかった
+			syntaxExit(1005, gLine, ident, false);
+		}
+		auto ptr = new FunctionCallExp(ident, args, pImpl->m_FunctionMap[ident]);
+		pImpl->m_ObjectPool.push_back(ptr);
+		return ptr;
+	}
+
+
 	void Interpreter::startStringLiteral() {
 		pImpl->m_LiteralTemp = "";
 	}
@@ -328,6 +396,43 @@ namespace vv12 {
 		return stml;
 	}
 
+	ParameterList* Interpreter::createParameterList() {
+		auto ptr = new ParameterList();
+		pImpl->m_ObjectPool.push_back(ptr);
+		return ptr;
+	}
+
+	ParameterList* Interpreter::createParameterList(const char* ident) {
+		auto ptr = new ParameterList(ident);
+		pImpl->m_ObjectPool.push_back(ptr);
+		return ptr;
+	}
+
+	ParameterList* Interpreter::createParameterList(ParameterList* pml, const char* ident) {
+		ParameterList *pos;
+		if (pml == nullptr)
+			return createParameterList(ident);
+		for (pos = pml; pos->getNext(); pos = pos->getNext())
+			;
+		pos->setNext(createParameterList(ident));
+		return pml;
+	}
+
+	
+	Statement* Interpreter::createFunctionDefineStm(const char* ident, const ParameterList* pml, const Statement* stm) {
+		extern int gLine;
+		auto it = pImpl->m_FunctionMap.find(ident);
+		if (it != pImpl->m_FunctionMap.end()) {
+			//すでにその名前の関数があった
+			syntaxExit(1004, gLine, ident, false);
+		}
+		auto ptr = new FunctionDefineStm(ident, pml, stm);
+		pImpl->m_ObjectPool.push_back(ptr);
+		pImpl->m_FunctionMap[ident] = ptr;
+		return ptr;
+	}
+
+
 	Root*  Interpreter::createRoot(const StatementList* stml) {
 		auto ptr = new Root(stml);
 		pImpl->m_ObjectPool.push_back(ptr);
@@ -351,6 +456,50 @@ namespace vv12 {
 			return pImpl->m_RootRuntime->m_VariableMap[key];
 		}
 	}
+
+	bool Interpreter::findLocalValiableValue(const char* key) {
+		auto tgtRuntime = pImpl->m_CurrentRuntime;
+		do {
+			if (tgtRuntime->m_IsFunc) {
+				auto it = tgtRuntime->m_VariableMap.find(key);
+				if (it != tgtRuntime->m_VariableMap.end()) {
+					//見つかった
+					return true;
+				}
+				else {
+					return false;
+				}
+			}
+			tgtRuntime = tgtRuntime->m_Parent.lock();
+		} while (tgtRuntime);
+		//ルートまでさかのぼってしまった。
+		return false;
+	}
+
+	Value& Interpreter::getLocalValiableValue(const char* key) {
+		auto tgtRuntime = pImpl->m_CurrentRuntime;
+		do {
+			if (tgtRuntime->m_IsFunc) {
+				auto it = tgtRuntime->m_VariableMap.find(key);
+				if (it != tgtRuntime->m_VariableMap.end()) {
+					//見つかった
+					return it->second;
+				}
+				else {
+					//無かったので作成
+					//stringで作成
+					tgtRuntime->m_VariableMap[key] = Value("");
+					return tgtRuntime->m_VariableMap[key];
+				}
+			}
+			tgtRuntime = tgtRuntime->m_Parent.lock();
+		} while (tgtRuntime);
+		//ルートまでさかのぼってしまった。
+		runtimeExit(2011, key);
+		return pImpl->m_TempVal;
+	}
+
+
 
 	void Interpreter::setRuntimeLineNumber(int num) {
 		pImpl->m_RuntimeLineNumber = num;

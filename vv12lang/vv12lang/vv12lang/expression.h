@@ -26,6 +26,7 @@ namespace vv12 {
 		subExp,
 		mulExp,
 		divExp,
+		functionExp,
 		printExp,
 		expTypeCount
 	};
@@ -99,9 +100,10 @@ namespace vv12 {
 	//--------------------------------------------------------------------------------------
 	class VariableExp : public Expression {
 	public:
-		VariableExp(const char* ident);
+		VariableExp(const char* ident, bool local = false);
 		virtual ~VariableExp();
 		const char* getIdentifier()const;
+		bool IsLocal() const;
 		Value& getVariableValue()const;
 		virtual Value Excute() const  override;
 	private:
@@ -109,6 +111,7 @@ namespace vv12 {
 		struct Impl;
 		Impl* pImpl;
 	};
+
 
 	//--------------------------------------------------------------------------------------
 	///  代入式クラス
@@ -175,6 +178,41 @@ namespace vv12 {
 		struct Impl;
 		Impl* pImpl;
 	};
+
+	//--------------------------------------------------------------------------------------
+///  引数クラス
+//--------------------------------------------------------------------------------------
+	class ArgumentList : public ObjBase {
+	public:
+		ArgumentList();
+		ArgumentList(const Expression* exp);
+		virtual ~ArgumentList();
+		const Expression* getExp() const;
+		ArgumentList* getNext()const;
+		void setNext(ArgumentList* next);
+	private:
+		// pImplイディオム
+		struct Impl;
+		Impl* pImpl;
+	};
+
+
+	class FunctionDefineStm;
+	//--------------------------------------------------------------------------------------
+///  関数呼び出し式クラス
+//--------------------------------------------------------------------------------------
+	class FunctionCallExp : public Expression {
+	public:
+		FunctionCallExp(const char* ident, const ArgumentList* args, const FunctionDefineStm* funcDef);
+		virtual ~FunctionCallExp();
+		const char* getIdentifier()const;
+		virtual Value Excute() const  override;
+	private:
+		// pImplイディオム
+		struct Impl;
+		Impl* pImpl;
+	};
+
 
 
 

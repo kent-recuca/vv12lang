@@ -33,13 +33,18 @@ namespace vv12 {
 		void pushBackObject(ObjBase* pobj);
 		const char* createFixedString(const char* ext);
 		///Expression
-		Expression* createVariableExp(const char* ident);
+		Expression* createVariableExp(const char* ident, bool isLocal);
 		Expression* createIntLiteralExp(const char* ext);
 		Expression* createDoubleLiteralExp(const char* ext);
 		Expression* createBinaryExp(const Expression* left, const Expression* right, ExpressionType t);
 		Expression* createRelationalExp(const Expression* left, const Expression* right, ExpressionType t);
 		Expression* createAssExp(const Expression* ident, const Expression* right);
 		Expression* createToAssExp(const Expression* ident, const Expression* right, ExpressionType t);
+		ArgumentList* createArgumentList();
+		ArgumentList* createArgumentList(const Expression* exp);
+		ArgumentList* createArgumentList(ArgumentList* agl, const Expression* exp);
+		Expression* createFunctionCallExp(const char* ident, const ArgumentList* args);
+
 
 		//文字列リテラル
 		void startStringLiteral();
@@ -54,6 +59,12 @@ namespace vv12 {
 			pushBackObject(ptr);
 			return ptr;
 		}
+
+		ParameterList* createParameterList();
+		ParameterList* createParameterList(const char* ident);
+		ParameterList* createParameterList(ParameterList* pml, const char* ident);
+		Statement* createFunctionDefineStm(const char* ident, const ParameterList* pml, const Statement* stm);
+
 		///StatementList
 		StatementList* createStatementList(const Statement* stm);
 		StatementList* createStatementList(StatementList* stml, const Statement* stm);
@@ -64,6 +75,11 @@ namespace vv12 {
 		///Exec関連
 		///変数の値の参照を取得
 		Value& getGlobalValiableValue(const char* key);
+		//ローカル変数に探す
+		bool findLocalValiableValue(const char* key);
+		///ローカル変数の値の参照を取得
+		Value& getLocalValiableValue(const char* key);
+
 		///１階層ランタイムをpushする
 		void pushRuntime(bool IsFunc = false);
 		///１階層ランタイムをpopする
@@ -76,6 +92,15 @@ namespace vv12 {
 		void pushBreak();
 		//break可能な深さをpopする。
 		void popBreak();
+		//continue可能かどうか
+		bool isContinueOK() const;
+		//break可能かどうか
+		bool isBreakOK() const;
+
+		//関数実行中かどうか
+		void setFunctionRuntime(bool b);
+		bool isFunctionRuntime() const;
+
 
 
 		///シンタックスエラー予約語関連

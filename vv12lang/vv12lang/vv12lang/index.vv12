@@ -1,17 +1,34 @@
+func ^sample1($val){
+ecn $val
+$local = "This is local"
+ecn "func!!"
+ecn $local
+return "sampleend";
+}
 ^a = "abc"
 ecn ^a
 ecn "hello
 world!!"
-^b = 5
-while(^b<=10){
-ecn ^b
-^b += 1
-	if(^b == 8){
-		ecn "IF!"
-	}
-}
+ecn"---------------------------------------------------"
 for(^i=0
 ;^i<10;^i+=1){
 ecn "for"
 }
+ecn"---------------------------------------------------"
 
+^b = 0
+while(1){
+^b += 1
+	if(^b == 10){
+		break;
+	}else{
+	 ecn "else"
+	}
+	if(^b == 8){
+		continue;
+	}
+ecn ^b
+}
+ecn "BREAK!"
+ecn"---------------------------------------------------"
+ecn ^sample1(2)
