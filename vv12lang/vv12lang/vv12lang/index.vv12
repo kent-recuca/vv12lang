@@ -1,34 +1,71 @@
 func ^sample1($val){
 ecn $val
-$local = "This is local"
-ecn "func!!"
+$local = "This is func sample1"
 ecn $local
-return "sampleend";
+return "sample1end";
 }
+
+func ^sample2($val){
+ecn $val
+$local = "This is func sample2"
+ecn $local
+return "sample1end";
+^sample1
+}
+
+ecn"-----------------------variable,printn,string(separate)-------------------------------"
+
 ^a = "abc"
 ecn ^a
 ecn "hello
 world!!"
-ecn"---------------------------------------------------"
+
+ecn"-----------------------for-------------------------------"
+
 for(^i=0
 ;^i<10;^i+=1){
-ecn "for"
+ecn "for sample"
 }
-ecn"---------------------------------------------------"
+
+ecn"-----------------------while-------------------------------"
+
+^w = 0
+while(^w < 5){
+ecn ^w
+^w += 1
+}
+
+ecn"-----------------------if,ifels,break,continue-------------------------------"
 
 ^b = 0
 while(1){
 ^b += 1
 	if(^b == 10){
 		break;
-	}else{
-	 ecn "else"
 	}
-	if(^b == 8){
+	if(^b != 8){
 		continue;
+
+	}else{
+	ecn "This is else"
 	}
 ecn ^b
 }
 ecn "BREAK!"
-ecn"---------------------------------------------------"
+
+ecn"-----------------------funvctioncall(single)-------------------------------"
+
 ecn ^sample1(2)
+
+ecn"-----------------------functioncall(multiple)-------------------------------"
+
+#ecn ^sample2(5)
+
+
+ecn"-----------------------array-------------------------------"
+
+^arr = array()
+^arr[] = array("This is array1-1")
+^arr[] = array("This is array1-2")
+ecn ^arr[0][0]
+ecn ^arr[1][0]

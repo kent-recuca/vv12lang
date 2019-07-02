@@ -26,6 +26,9 @@ namespace vv12 {
 		subExp,
 		mulExp,
 		divExp,
+		arrayExp,
+		arrayInitValueExp,
+		arrayInitKeyValueExp,
 		functionExp,
 		printExp,
 		expTypeCount
@@ -195,6 +198,110 @@ namespace vv12 {
 		struct Impl;
 		Impl* pImpl;
 	};
+
+	//--------------------------------------------------------------------------------------
+///  配列添え字と値ペアクラス
+//--------------------------------------------------------------------------------------
+	class ArrKeyValueList : public ObjBase {
+	public:
+		ArrKeyValueList(const Expression* key, const Expression* value);
+		virtual ~ArrKeyValueList();
+		const Expression* getKey() const;
+		const Expression* getValue() const;
+		ArrKeyValueList* getNext()const;
+		void setNext(ArrKeyValueList* next);
+	private:
+		// pImplイディオム
+		struct Impl;
+		Impl* pImpl;
+	};
+
+	//--------------------------------------------------------------------------------------
+///  array式(Valueのみ)
+//--------------------------------------------------------------------------------------
+	class ArrayInitValueExp : public Expression {
+	public:
+		ArrayInitValueExp(const ArgumentList* argumentList);
+		virtual ~ArrayInitValueExp();
+		const ArgumentList* getArgumentList()const;
+		virtual Value Excute() const  override;
+	private:
+		// pImplイディオム
+		struct Impl;
+		Impl* pImpl;
+	};
+
+
+
+	//--------------------------------------------------------------------------------------
+///  array式(KeyとValue)
+//--------------------------------------------------------------------------------------
+	class ArrayInitKeyValueExp : public Expression {
+	public:
+		ArrayInitKeyValueExp(const ArrKeyValueList* arrKeyValueList);
+		virtual ~ArrayInitKeyValueExp();
+		const ArrKeyValueList* getArrKeyValueList()const;
+		virtual Value Excute() const  override;
+	private:
+		// pImplイディオム
+		struct Impl;
+		Impl* pImpl;
+	};
+
+
+	//--------------------------------------------------------------------------------------
+///  配列添え字クラス
+//--------------------------------------------------------------------------------------
+	class ArrKeytList : public ObjBase {
+	public:
+		ArrKeytList();
+		ArrKeytList(const Expression* key);
+		virtual ~ArrKeytList();
+		const Expression* getKey() const;
+		Value& getValue(Value& parent);
+		ArrKeytList* getNext()const;
+		void setNext(ArrKeytList* next);
+	private:
+		// pImplイディオム
+		struct Impl;
+		Impl* pImpl;
+	};
+
+	//--------------------------------------------------------------------------------------
+///  配列変数式クラス
+//--------------------------------------------------------------------------------------
+	class ArrayExp : public Expression {
+	public:
+		ArrayExp(const char* ident, ArrKeytList* key, bool local = false);
+		virtual ~ArrayExp();
+		const char* getIdentifier()const;
+		bool IsLocal() const;
+		Value& getValue()const;
+		virtual Value Excute() const  override;
+	private:
+		// pImplイディオム
+		struct Impl;
+		Impl* pImpl;
+	};
+
+	//--------------------------------------------------------------------------------------
+///  配列代入式クラス
+//--------------------------------------------------------------------------------------
+	class AssignArrExp : public Expression {
+	public:
+		AssignArrExp(const Expression* variable, const Expression* operand);
+		virtual ~AssignArrExp();
+		const Expression* getVariable()const;
+		const Expression* getOperand()const;
+		virtual Value Excute() const  override;
+	private:
+		// pImplイディオム
+		struct Impl;
+		Impl* pImpl;
+	};
+
+
+
 
 
 	class FunctionDefineStm;

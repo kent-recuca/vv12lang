@@ -39,7 +39,16 @@ namespace vv12 {
 		Expression* createBinaryExp(const Expression* left, const Expression* right, ExpressionType t);
 		Expression* createRelationalExp(const Expression* left, const Expression* right, ExpressionType t);
 		Expression* createAssExp(const Expression* ident, const Expression* right);
+		Expression* createAssignArrExp(const Expression* variable, const Expression* operand);
 		Expression* createToAssExp(const Expression* ident, const Expression* right, ExpressionType t);
+		ArrKeyValueList* createArrKeyValueList(const Expression* key, const Expression* value);
+		ArrKeyValueList* createArrKeyValueList(ArrKeyValueList* prev, const Expression* key, const Expression* value);
+		Expression* createArrayInitValueExp(const ArgumentList* argumentList);
+		Expression* createArrayInitKeyValueExp(const ArrKeyValueList* arrKeyValueList);
+		ArrKeytList* createArrKeytList();
+		ArrKeytList* createArrKeytList(const Expression* key);
+		ArrKeytList* createArrKeytList(ArrKeytList* parent, const Expression* key);
+		Expression* createArrayExp(const char* ident, ArrKeytList* keylist, bool isLocal);
 		ArgumentList* createArgumentList();
 		ArgumentList* createArgumentList(const Expression* exp);
 		ArgumentList* createArgumentList(ArgumentList* agl, const Expression* exp);

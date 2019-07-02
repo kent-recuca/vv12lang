@@ -13,6 +13,8 @@ namespace vv12 {
 		ParamListType,
 		RootType,
 		InterpreterType,
+		ArrKeyListType,
+		ArrKeyValueListType,
 		objTypeCount
 	};
 

@@ -69,25 +69,29 @@ extern int yydebug;
     GE = 273,
     SEMICOLON = 274,
     COMMA = 275,
-    MULASS = 276,
-    DIVASS = 277,
-    ADDASS = 278,
-    SUBASS = 279,
-    ASS = 280,
-    PRINTN = 281,
-    PRINT = 282,
-    WHILE = 283,
-    IF = 284,
-    ELSE = 285,
-    FOR = 286,
-    BREAK = 287,
-    CONTINUE = 288,
-    RETURN = 289,
-    FUNCTION = 290,
-    LC = 291,
-    RC = 292,
-    LP = 293,
-    RP = 294
+    COLON = 276,
+    MULASS = 277,
+    DIVASS = 278,
+    ADDASS = 279,
+    SUBASS = 280,
+    ASS = 281,
+    PRINTN = 282,
+    PRINT = 283,
+    WHILE = 284,
+    IF = 285,
+    ELSE = 286,
+    FOR = 287,
+    BREAK = 288,
+    CONTINUE = 289,
+    RETURN = 290,
+    FUNCTION = 291,
+    ARRAY = 292,
+    LC = 293,
+    RC = 294,
+    LP = 295,
+    RP = 296,
+    LB = 297,
+    RB = 298
   };
 #endif
 
@@ -104,9 +108,11 @@ union YYSTYPE
     vv12::StatementList* statementList;
 	vv12::ParameterList* parameterList;
 	vv12::ArgumentList* argumentList;
+	vv12::ArrKeyValueList* arraykeyvalueList;
+    vv12::ArrKeytList* arraykeyList;
     vv12::Root* root;
 
-#line 110 "vv12lang.tab.h" /* yacc.c:1913  */
+#line 116 "vv12lang.tab.h" /* yacc.c:1913  */
 };
 
 typedef union YYSTYPE YYSTYPE;

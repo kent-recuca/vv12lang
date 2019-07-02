@@ -322,6 +322,13 @@ namespace vv12 {
 		return ptr;
 	}
 
+	Expression* Interpreter::createAssignArrExp(const Expression* variable, const Expression* operand) {
+		auto ptr = new AssignArrExp(variable, operand);
+		pImpl->m_ObjectPool.push_back(ptr);
+		return ptr;
+	}
+
+
 	Expression* Interpreter::createToAssExp(const Expression* ident, const Expression* right, ExpressionType t) {
 		auto ptr = new ToAssExp(ident, right, t);
 		pImpl->m_ObjectPool.push_back(ptr);
@@ -350,6 +357,64 @@ namespace vv12 {
 		pos->setNext(createArgumentList(exp));
 		return agl;
 	}
+
+	Expression* Interpreter::createArrayInitValueExp(const ArgumentList* argumentList) {
+		auto ptr = new ArrayInitValueExp(argumentList);
+		pImpl->m_ObjectPool.push_back(ptr);
+		return ptr;
+	}
+
+	Expression* Interpreter::createArrayInitKeyValueExp(const ArrKeyValueList* arrKeyValueList) {
+		auto ptr = new ArrayInitKeyValueExp(arrKeyValueList);
+		pImpl->m_ObjectPool.push_back(ptr);
+		return ptr;
+	}
+
+	ArrKeyValueList* Interpreter::createArrKeyValueList(const Expression* key, const Expression* value) {
+		auto ptr = new ArrKeyValueList(key, value);
+		pImpl->m_ObjectPool.push_back(ptr);
+		return ptr;
+	}
+
+	ArrKeyValueList* Interpreter::createArrKeyValueList(ArrKeyValueList* prev, const Expression* key, const Expression* value) {
+		ArrKeyValueList* pos;
+		if (prev == nullptr)
+			return createArrKeyValueList(key, value);
+		for (pos = prev; pos->getNext(); pos = pos->getNext())
+			;
+		pos->setNext(createArrKeyValueList(key, value));
+		return prev;
+	}
+
+	ArrKeytList* Interpreter::createArrKeytList() {
+		auto ptr = new ArrKeytList();
+		pImpl->m_ObjectPool.push_back(ptr);
+		return ptr;
+	}
+
+	ArrKeytList* Interpreter::createArrKeytList(const Expression* key) {
+		auto ptr = new ArrKeytList(key);
+		pImpl->m_ObjectPool.push_back(ptr);
+		return ptr;
+	}
+	ArrKeytList* Interpreter::createArrKeytList(ArrKeytList* parent, const Expression* key) {
+		ArrKeytList* pos;
+		if (parent == nullptr)
+			return createArrKeytList(key);
+		for (pos = parent; pos->getNext(); pos = pos->getNext())
+			;
+		pos->setNext(createArrKeytList(key));
+		return parent;
+	}
+
+
+	Expression* Interpreter::createArrayExp(const char* ident, ArrKeytList* keylist, bool isLocal) {
+		string str = clampToken(ident);
+		auto ptr = new ArrayExp(str.c_str(), keylist, isLocal);
+		pImpl->m_ObjectPool.push_back(ptr);
+		return ptr;
+	}
+
 
 
 	Expression* Interpreter::createFunctionCallExp(const char* ident, const ArgumentList* args) {

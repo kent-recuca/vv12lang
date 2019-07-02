@@ -27,11 +27,14 @@ int yywrap(void){ return 1; }
     "*"     return MUL;
     "/"     return DIV;
     "="     return ASS;
+	"["     return LB;
+    "]"     return RB;
 	"("     return LP;
     ")"     return RP;
 	"{"     return LC;
     "}"     return RC;
 	";"     return SEMICOLON;
+	":"     return COLON;
 	","		return COMMA;
 	"while"   return WHILE;
 	"if"    return IF;
@@ -43,6 +46,7 @@ int yywrap(void){ return 1; }
 	"continue"	return CONTINUE;
 	"return"	return RETURN;
 	"func"   return FUNCTION;
+	"array"   return ARRAY;
     "#*"   { BEGIN(COMMENT);}
     [#]+ { BEGIN(LINE_COMMENT);}
 	"\""    {

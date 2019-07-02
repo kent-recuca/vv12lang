@@ -165,6 +165,272 @@ namespace vv12 {
 	}
 
 	//--------------------------------------------------------------------------------------
+///  配列添え字と値ペアクラス
+//--------------------------------------------------------------------------------------
+	struct ArrKeyValueList::Impl {
+		const Expression* m_Key;
+		const Expression* m_Value;
+		ArrKeyValueList* m_Next;
+		Value tempVal;
+	};
+
+	ArrKeyValueList::ArrKeyValueList(const Expression* key, const Expression* value) :
+		ObjBase(ObjType::ArrKeyValueListType),
+		pImpl(new Impl)
+	{
+		pImpl->m_Key = key;
+		pImpl->m_Value = value;
+		pImpl->m_Next = nullptr;
+
+	}
+	ArrKeyValueList::~ArrKeyValueList() {
+		delete pImpl;
+	}
+
+	const Expression* ArrKeyValueList::getKey() const {
+		return pImpl->m_Key;
+
+	}
+	const Expression* ArrKeyValueList::getValue() const {
+		return pImpl->m_Value;
+
+	}
+	ArrKeyValueList* ArrKeyValueList::getNext()const {
+		return pImpl->m_Next;
+
+	}
+	void ArrKeyValueList::setNext(ArrKeyValueList* next) {
+		pImpl->m_Next = next;
+	}
+
+	//--------------------------------------------------------------------------------------
+///  array式(Valueのみ)
+//--------------------------------------------------------------------------------------
+	struct ArrayInitValueExp::Impl {
+		const ArgumentList* m_ArgumentList;
+	};
+
+	ArrayInitValueExp::ArrayInitValueExp(const ArgumentList* argumentList) :
+		Expression(ExpressionType::arrayInitValueExp),
+		pImpl(new Impl)
+	{
+		pImpl->m_ArgumentList = argumentList;
+	}
+
+	ArrayInitValueExp::~ArrayInitValueExp()
+	{
+		delete pImpl;
+	}
+
+	const ArgumentList* ArrayInitValueExp::getArgumentList()const {
+		return pImpl->m_ArgumentList;
+	}
+
+	Value ArrayInitValueExp::Excute() const {
+		Value retValue;
+		retValue.setArrClear();
+		if (getArgumentList() != nullptr && getArgumentList()->getExp() != nullptr) {
+			auto pos = getArgumentList();
+			size_t count = 0;
+			while (pos) {
+				auto val = pos->getExp()->Excute();
+				retValue.createArrKey(count);
+				retValue[count] = val;
+				pos = pos->getNext();
+				count++;
+			}
+		}
+		return retValue;
+	}
+
+
+
+	//--------------------------------------------------------------------------------------
+///  array式(KeyとValue)
+//--------------------------------------------------------------------------------------
+	struct ArrayInitKeyValueExp::Impl {
+		const ArrKeyValueList* m_ArrKeyValueList;
+		Value tempVal;
+	};
+
+
+	ArrayInitKeyValueExp::ArrayInitKeyValueExp(const ArrKeyValueList* arrKeyValueList) :
+		Expression(ExpressionType::arrayInitKeyValueExp),
+		pImpl(new Impl)
+	{
+		pImpl->m_ArrKeyValueList = arrKeyValueList;
+	}
+	ArrayInitKeyValueExp::~ArrayInitKeyValueExp() {
+		delete pImpl;
+	}
+
+	const ArrKeyValueList* ArrayInitKeyValueExp::getArrKeyValueList()const {
+		return pImpl->m_ArrKeyValueList;
+	}
+
+	Value ArrayInitKeyValueExp::Excute() const {
+		Value retVal;
+		retVal.setArrClear();
+		auto pos = getArrKeyValueList();
+		while (pos) {
+			auto key = pos->getKey()->Excute();
+			auto val = pos->getValue()->Excute();
+			if (key.getType() == ValueType::intVal && key.getInt() >= 0) {
+				retVal.createArrKey((size_t)key.getInt());
+				retVal[(size_t)key.getInt()] = val;
+			}
+			else if (key.getType() == ValueType::stringVal) {
+				//文字列であってもsize_tに変換できるのならsize_tとして処理
+				int chkInt = key.getInt();
+				if (chkInt >= 0) {
+					retVal.createArrKey((size_t)chkInt);
+					retVal[(size_t)chkInt] = val;
+				}
+				else {
+					retVal.createArrKey(key.getString());
+					retVal[key.getString()] = val;
+				}
+			}
+			else {
+				Interpreter::getInp()->runtimeExit(2019);
+				return pImpl->tempVal;
+			}
+			pos = pos->getNext();
+		}
+		return retVal;
+	}
+
+	//--------------------------------------------------------------------------------------
+///  配列添え字クラス
+//--------------------------------------------------------------------------------------
+	struct ArrKeytList::Impl {
+		const Expression* m_Key;
+		ArrKeytList* m_Next;
+		Value tempVal;
+	};
+
+	ArrKeytList::ArrKeytList() :
+		ObjBase(ObjType::ArrKeyListType),
+		pImpl(new Impl)
+	{
+		pImpl->m_Key = nullptr;
+		pImpl->m_Next = nullptr;
+	}
+
+	ArrKeytList::ArrKeytList(const Expression* key) :
+		ObjBase(ObjType::ArrKeyListType),
+		pImpl(new Impl)
+	{
+		pImpl->m_Key = key;
+		pImpl->m_Next = nullptr;
+	}
+
+	ArrKeytList::~ArrKeytList() {
+		delete pImpl;
+	}
+
+	const Expression* ArrKeytList::getKey() const {
+		return pImpl->m_Key;
+	}
+	ArrKeytList* ArrKeytList::getNext()const {
+		return pImpl->m_Next;
+	}
+
+	void ArrKeytList::setNext(ArrKeytList* next) {
+		pImpl->m_Next = next;
+	}
+
+	Value& ArrKeytList::getValue(Value& parent) {
+		Value v;
+		if (getKey()) {
+			v = getKey()->Excute();
+		}
+		else {
+			v = (int)parent.getNextIndexKey();
+		}
+		if (v.getType() == ValueType::intVal && v.getInt() >= 0) {
+			if (getNext()) {
+				return getNext()->getValue(parent[(size_t)v.getInt()]);
+			}
+			else {
+				return parent[(size_t)v.getInt()];
+			}
+		}
+		else if (v.getType() == ValueType::stringVal) {
+			//文字列であってもsize_tに変換できるのならsize_tとして処理
+			int chkInt = v.getInt();
+			if (chkInt >= 0) {
+				if (getNext()) {
+					return getNext()->getValue(parent[(size_t)v.getInt()]);
+				}
+				else {
+					return parent[(size_t)v.getInt()];
+				}
+			}
+			else {
+				if (getNext()) {
+					return getNext()->getValue(parent[v.getString()]);
+				}
+				else {
+					return parent[v.getString()];
+				}
+			}
+		}
+		else {
+			Interpreter::getInp()->runtimeExit(2019);
+			return pImpl->tempVal;
+		}
+	}
+
+	//--------------------------------------------------------------------------------------
+///  配列変数式クラス
+//--------------------------------------------------------------------------------------
+	struct ArrayExp::Impl {
+		const char*  m_VariableName;
+		bool m_Local;
+		ArrKeytList* m_ArrKeytList;
+		Value tempVal;
+	};
+	ArrayExp::ArrayExp(const char* ident, ArrKeytList* key, bool local) :
+		Expression(ExpressionType::arrayExp),
+		pImpl(new Impl)
+	{
+		pImpl->m_VariableName = Interpreter::getInp()->createFixedString(ident);
+		pImpl->m_ArrKeytList = key;
+		pImpl->m_Local = local;
+	}
+	ArrayExp::~ArrayExp() {
+		delete pImpl;
+
+	}
+	const char* ArrayExp::getIdentifier()const {
+		return pImpl->m_VariableName;
+	}
+	bool ArrayExp::IsLocal() const {
+		return pImpl->m_Local;
+
+	}
+
+	Value& ArrayExp::getValue()const {
+		if (IsLocal()) {
+			return pImpl->m_ArrKeytList->getValue(Interpreter::getInp()->getLocalValiableValue(pImpl->m_VariableName));
+		}
+		else {
+			if (Interpreter::getInp()->findLocalValiableValue(pImpl->m_VariableName)) {
+				return pImpl->m_ArrKeytList->getValue(Interpreter::getInp()->getLocalValiableValue(pImpl->m_VariableName));
+			}
+			return pImpl->m_ArrKeytList->getValue(Interpreter::getInp()->getGlobalValiableValue(pImpl->m_VariableName));
+		}
+	}
+	Value ArrayExp::Excute() const {
+		setRuntimeLineNumber();
+		Value ret = getValue();
+		return ret;
+	}
+
+
+
+	//--------------------------------------------------------------------------------------
 	///  代入式クラス
 	//--------------------------------------------------------------------------------------
 	struct AssignExp::Impl {
@@ -204,6 +470,48 @@ namespace vv12 {
 		}
 		return Value();
 	}
+
+	//--------------------------------------------------------------------------------------
+///  配列代入式クラス
+//--------------------------------------------------------------------------------------
+	struct AssignArrExp::Impl {
+		const Expression* m_Variable;
+		const Expression* m_Operand;
+	};
+
+	AssignArrExp::AssignArrExp(const Expression* variable, const Expression* operand)
+		:Expression(ExpressionType::assignExp),
+		pImpl(new Impl)
+	{
+		pImpl->m_Variable = variable;
+		pImpl->m_Operand = operand;
+	}
+
+	AssignArrExp::~AssignArrExp() {
+		delete pImpl;
+	}
+
+	const Expression* AssignArrExp::getVariable()const {
+		return pImpl->m_Variable;
+	}
+
+	const Expression* AssignArrExp::getOperand()const {
+		return pImpl->m_Operand;
+	}
+
+	Value AssignArrExp::Excute() const {
+		setRuntimeLineNumber();
+		//変数の値の参照を取り出す
+		auto valptr = dynamic_cast<const ArrayExp*>(pImpl->m_Variable);
+		if (valptr) {
+			Value& v = valptr->getValue();
+			v = pImpl->m_Operand->Excute();
+			//それを返す
+			return v;
+		}
+		return Value();
+	}
+
 
 	//--------------------------------------------------------------------------------------
 ///  関係式クラス
