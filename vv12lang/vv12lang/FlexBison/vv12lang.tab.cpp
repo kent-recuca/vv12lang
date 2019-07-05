@@ -435,18 +435,18 @@ union yyalloc
 #endif /* !YYCOPY_NEEDED */
 
 /* YYFINAL -- State number of the termination state.  */
-#define YYFINAL  57
+#define YYFINAL  59
 /* YYLAST -- Last index in YYTABLE.  */
-#define YYLAST   194
+#define YYLAST   197
 
 /* YYNTOKENS -- Number of terminals.  */
 #define YYNTOKENS  44
 /* YYNNTS -- Number of nonterminals.  */
 #define YYNNTS  27
 /* YYNRULES -- Number of rules.  */
-#define YYNRULES  74
+#define YYNRULES  75
 /* YYNSTATES -- Number of states.  */
-#define YYNSTATES  143
+#define YYNSTATES  144
 
 /* YYTRANSLATE[YYX] -- Symbol number corresponding to YYX as returned
    by yylex, with out-of-bounds checking.  */
@@ -497,13 +497,13 @@ static const yytype_uint8 yytranslate[] =
 static const yytype_uint16 yyrline[] =
 {
        0,    51,    51,    57,    61,    67,    68,    69,    70,    71,
-      72,    73,    76,    80,    86,    90,    96,   100,   106,   110,
-     116,   120,   124,   128,   134,   138,   144,   151,   154,   158,
-     164,   167,   168,   172,   176,   180,   184,   188,   194,   195,
-     199,   205,   206,   210,   214,   218,   224,   225,   229,   235,
-     236,   240,   246,   247,   253,   254,   255,   256,   257,   263,
-     267,   274,   277,   281,   287,   291,   297,   301,   307,   311,
-     315,   321,   325,   331,   335
+      72,    73,    76,    80,    84,    90,    94,   100,   104,   110,
+     114,   120,   124,   128,   132,   138,   142,   148,   155,   158,
+     162,   168,   171,   172,   176,   180,   184,   188,   192,   198,
+     199,   203,   209,   210,   214,   218,   222,   228,   229,   233,
+     239,   240,   244,   250,   251,   257,   258,   259,   260,   261,
+     267,   271,   278,   281,   285,   291,   295,   301,   305,   311,
+     315,   319,   325,   329,   335,   339
 };
 #endif
 
@@ -543,10 +543,10 @@ static const yytype_uint16 yytoknum[] =
 };
 # endif
 
-#define YYPACT_NINF -39
+#define YYPACT_NINF -41
 
 #define yypact_value_is_default(Yystate) \
-  (!!((Yystate) == (-39)))
+  (!!((Yystate) == (-41)))
 
 #define YYTABLE_NINF -1
 
@@ -557,21 +557,21 @@ static const yytype_uint16 yytoknum[] =
      STATE-NUM.  */
 static const yytype_int16 yypact[] =
 {
-     118,   -38,   -37,   -39,   -39,   -39,   -39,    16,    16,   -22,
-       1,     6,    60,    66,    71,   102,    61,    22,   109,   118,
-     -39,   -39,   -39,   -39,   -39,   -39,   -39,   -39,   121,   -39,
-       0,   101,    35,    20,   -39,   -39,   -39,   105,    46,   -39,
-      16,     5,   100,   100,   135,   136,    16,    16,   118,   -39,
-     -39,   -39,   130,   127,    16,   -39,    59,   -39,   -39,   -39,
-      16,    16,    16,    16,    16,    16,    16,    16,    77,    77,
-      16,    16,    16,    16,    16,    16,   -39,   -17,   -39,   137,
-      16,   -39,   -39,   138,   140,   159,   -39,   178,   162,    -5,
-      -4,   -39,   101,   -39,   -39,   101,    35,    35,    35,    35,
-      20,    20,   -37,   -39,   -39,   -39,   -39,   -39,   -39,   -39,
-     -39,    16,   -39,   -39,   141,   118,   118,    16,   -39,    -3,
-      16,   -39,    16,   -39,   -39,   -39,   -39,   154,   167,   183,
-     150,   -39,   168,   118,    16,   -39,   -39,    16,   -39,   149,
-     -39,   118,   -39
+     116,   -34,   -40,   -41,   -41,   -41,   -41,    23,    23,   -35,
+     -31,   116,    53,    66,    15,    79,    72,    51,    23,   106,
+     116,   -41,   -41,   -41,   -41,   -41,   -41,   -41,   -41,   109,
+     -41,    19,    21,    34,    39,   -41,   -41,   -41,    99,   155,
+     -41,    23,    10,    84,    84,   119,   122,    23,    23,    23,
+     -41,   -41,   -41,   123,    92,    23,   -41,    65,   121,   -41,
+     -41,   -41,    23,    23,    23,    23,    23,    23,    23,    23,
+      59,    59,    23,    23,    23,    23,    23,    23,   -41,   -16,
+     -41,    98,    23,   -41,   -41,   101,   114,   128,   -41,   182,
+     166,   -10,     4,   -41,   -41,    21,   -41,   -41,    21,    34,
+      34,    34,    34,    39,    39,   -40,   -41,   -41,   -41,   -41,
+     -41,   -41,   -41,   -41,    23,   -41,   -41,   145,   116,   116,
+      23,   -41,    26,    23,   -41,    23,   -41,   -41,   -41,   -41,
+     158,   149,   187,   154,   -41,   172,   116,   116,   -41,   -41,
+      23,   -41,   -41,   -41
 };
 
   /* YYDEFACT[STATE-NUM] -- Default reduction number in state STATE-NUM.
@@ -579,37 +579,37 @@ static const yytype_int16 yypact[] =
      means the default is an error.  */
 static const yytype_uint8 yydefact[] =
 {
-       0,    71,    72,    74,    73,    58,    12,     0,     0,     0,
-       0,     0,     0,     0,     0,     0,     0,     0,     0,     2,
-       3,     5,     6,     7,     8,     9,    10,    11,     0,    30,
-      31,    38,    41,    46,    49,    52,    55,    54,    56,    57,
-      61,     0,    66,    67,     0,     0,     0,     0,     0,    21,
-      20,    22,     0,     0,    61,    14,     0,     1,     4,    13,
+       0,    72,    73,    75,    74,    59,    12,     0,     0,     0,
        0,     0,     0,     0,     0,     0,     0,     0,     0,     0,
-       0,     0,     0,     0,     0,     0,    62,     0,    68,     0,
-       0,    24,    25,     0,     0,     0,    23,    27,    62,     0,
-       0,    15,    39,    54,    56,    40,    42,    43,    44,    45,
-      47,    48,    71,    50,    51,    33,    36,    37,    34,    35,
-      32,     0,    53,    69,     0,     0,     0,     0,    28,     0,
-       0,    59,     0,    60,    63,    70,    18,    17,     0,     0,
-       0,    64,     0,     0,     0,    29,    26,     0,    16,     0,
-      65,     0,    19
+       2,     3,     5,     6,     7,     8,     9,    10,    11,     0,
+      31,    32,    39,    42,    47,    50,    53,    56,    55,    57,
+      58,    62,     0,    67,    68,     0,     0,     0,     0,     0,
+      22,    21,    23,     0,     0,    62,    15,     0,     0,     1,
+       4,    13,     0,     0,     0,     0,     0,     0,     0,     0,
+       0,     0,     0,     0,     0,     0,     0,     0,    63,     0,
+      69,     0,     0,    25,    26,     0,     0,     0,    24,    28,
+      63,     0,     0,    16,    14,    40,    55,    57,    41,    43,
+      44,    45,    46,    48,    49,    72,    51,    52,    34,    37,
+      38,    35,    36,    33,     0,    54,    70,     0,     0,     0,
+       0,    29,     0,     0,    60,     0,    61,    64,    71,    19,
+      18,     0,     0,     0,    65,     0,     0,     0,    30,    27,
+       0,    17,    20,    66
 };
 
   /* YYPGOTO[NTERM-NUM].  */
 static const yytype_int16 yypgoto[] =
 {
-     -39,   -39,   174,   -13,   -39,    62,   -39,   -39,   -39,   -39,
-     -39,   -39,    -7,    98,   -39,    39,   112,    40,   -39,    43,
-     -39,   139,   -39,    72,   192,    97,   -39
+     -41,   -41,   177,    -8,   -41,    63,   -41,   -41,   -41,   -41,
+     -41,   -41,    -7,    62,   -41,    14,   118,    40,   -41,    44,
+     -41,   140,   -41,    95,   195,   105,   -41
 };
 
   /* YYDEFGOTO[NTERM-NUM].  */
 static const yytype_int8 yydefgoto[] =
 {
-      -1,    18,    19,    20,    21,    22,    23,    24,    25,    26,
-      27,   119,    28,    29,    30,    31,    32,    33,    34,    35,
-      36,    77,    90,    37,    42,    38,    39
+      -1,    19,    20,    21,    22,    23,    24,    25,    26,    27,
+      28,   122,    29,    30,    31,    32,    33,    34,    35,    36,
+      37,    79,    92,    38,    43,    39,    40
 };
 
   /* YYTABLE[YYPACT[STATE-NUM]] -- What to do in state STATE-NUM.  If
@@ -617,50 +617,50 @@ static const yytype_int8 yydefgoto[] =
      number is the opposite.  If YYTABLE_NINF, syntax error.  */
 static const yytype_uint8 yytable[] =
 {
-      44,    45,    40,   111,    41,    41,    58,    52,     1,     2,
-       3,     4,     5,    60,    61,   111,   122,   129,    46,     1,
-       2,     3,     4,     5,   112,     1,     2,     3,     4,     5,
-       6,    68,    69,    76,    79,    85,   121,   123,   130,    83,
-      84,    47,    16,    58,    66,    67,    48,    88,    78,     7,
-       8,     9,    10,    16,    11,    12,    13,    14,    15,    16,
-      17,    55,     1,     2,     3,     4,     5,     6,    71,    72,
-      73,    74,    75,   114,     1,     2,     3,     4,     5,    49,
-     102,     2,     3,     4,     5,    50,     7,     8,     9,    10,
-      51,    11,    12,    13,    14,    15,    16,    17,    91,    92,
-      95,    54,   126,   127,   124,    53,   100,   101,    16,    57,
-     128,   103,   104,   131,    16,   132,    62,    63,    64,    65,
-     138,     1,     2,     3,     4,     5,     6,   139,   142,    59,
-     140,    70,    93,    93,    93,    93,    93,    93,    93,    93,
-      93,    93,    80,    81,    82,     7,     8,     9,    10,    86,
-      11,    12,    13,    14,    15,    16,    17,    94,    94,    94,
-      94,    94,    94,    94,    94,    94,    94,    87,   105,   106,
-     107,   108,   109,   110,    96,    97,    98,    99,   117,   115,
-     113,   116,   118,   120,   125,   133,   134,   135,    17,   137,
-     141,    56,   136,    89,    43
+      45,    46,    42,    49,   114,    47,    41,    53,    42,    48,
+     114,    58,    60,     1,     2,     3,     4,     5,     1,     2,
+       3,     4,     5,    52,   125,   115,     1,     2,     3,     4,
+       5,   124,    62,    63,    78,    81,    64,    65,    66,    67,
+      85,    86,    87,    68,    69,   126,   132,    16,    90,    60,
+      70,    71,    16,    80,     1,     2,     3,     4,     5,     6,
+      16,    50,   105,     2,     3,     4,     5,   133,     1,     2,
+       3,     4,     5,     6,    51,   117,    95,    98,     7,     8,
+       9,    10,    54,    11,    12,    13,    14,    15,    16,    17,
+      56,    18,     7,     8,     9,    10,    16,    11,    12,    13,
+      14,    15,    16,    17,    93,    18,    59,   127,   103,   104,
+     129,   130,    55,   131,   106,   107,   134,    61,   135,     1,
+       2,     3,     4,     5,     6,    72,    82,    83,   141,   142,
+      84,    88,    89,   143,   108,   109,   110,   111,   112,   113,
+      94,   116,   118,     7,     8,     9,    10,   120,    11,    12,
+      13,    14,    15,    16,    17,   119,    18,    96,    96,    96,
+      96,    96,    96,    96,    96,    96,    96,    97,    97,    97,
+      97,    97,    97,    97,    97,    97,    97,    73,    74,    75,
+      76,    77,    99,   100,   101,   102,   121,   123,   128,   136,
+     137,   138,    17,   140,    57,    91,   139,    44
 };
 
 static const yytype_uint8 yycheck[] =
 {
-       7,     8,    40,    20,    42,    42,    19,    14,     3,     4,
-       5,     6,     7,    13,    14,    20,    20,    20,    40,     3,
-       4,     5,     6,     7,    41,     3,     4,     5,     6,     7,
-       8,    11,    12,    40,    41,    48,    41,    41,    41,    46,
-      47,    40,    37,    56,     9,    10,    40,    54,    43,    27,
-      28,    29,    30,    37,    32,    33,    34,    35,    36,    37,
-      38,    39,     3,     4,     5,     6,     7,     8,    22,    23,
-      24,    25,    26,    80,     3,     4,     5,     6,     7,    19,
-       3,     4,     5,     6,     7,    19,    27,    28,    29,    30,
-      19,    32,    33,    34,    35,    36,    37,    38,    39,    60,
-      61,    40,   115,   116,   111,     3,    66,    67,    37,     0,
-     117,    68,    69,   120,    37,   122,    15,    16,    17,    18,
-     133,     3,     4,     5,     6,     7,     8,   134,   141,     8,
-     137,    26,    60,    61,    62,    63,    64,    65,    66,    67,
-      68,    69,    42,     8,     8,    27,    28,    29,    30,    19,
-      32,    33,    34,    35,    36,    37,    38,    60,    61,    62,
-      63,    64,    65,    66,    67,    68,    69,    40,    70,    71,
-      72,    73,    74,    75,    62,    63,    64,    65,    19,    41,
-      43,    41,     4,    21,    43,    31,    19,     4,    38,    21,
-      41,    17,   130,    54,     2
+       7,     8,    42,    11,    20,    40,    40,    14,    42,    40,
+      20,    18,    20,     3,     4,     5,     6,     7,     3,     4,
+       5,     6,     7,     8,    20,    41,     3,     4,     5,     6,
+       7,    41,    13,    14,    41,    42,    15,    16,    17,    18,
+      47,    48,    49,     9,    10,    41,    20,    37,    55,    57,
+      11,    12,    37,    43,     3,     4,     5,     6,     7,     8,
+      37,     8,     3,     4,     5,     6,     7,    41,     3,     4,
+       5,     6,     7,     8,     8,    82,    62,    63,    27,    28,
+      29,    30,     3,    32,    33,    34,    35,    36,    37,    38,
+      39,    40,    27,    28,    29,    30,    37,    32,    33,    34,
+      35,    36,    37,    38,    39,    40,     0,   114,    68,    69,
+     118,   119,    40,   120,    70,    71,   123,     8,   125,     3,
+       4,     5,     6,     7,     8,    26,    42,     8,   136,   137,
+       8,     8,    40,   140,    72,    73,    74,    75,    76,    77,
+      19,    43,    41,    27,    28,    29,    30,    19,    32,    33,
+      34,    35,    36,    37,    38,    41,    40,    62,    63,    64,
+      65,    66,    67,    68,    69,    70,    71,    62,    63,    64,
+      65,    66,    67,    68,    69,    70,    71,    22,    23,    24,
+      25,    26,    64,    65,    66,    67,     4,    21,    43,    31,
+      41,     4,    38,    21,    17,    55,   133,     2
 };
 
   /* YYSTOS[STATE-NUM] -- The (internal number of the) accessing
@@ -668,46 +668,46 @@ static const yytype_uint8 yycheck[] =
 static const yytype_uint8 yystos[] =
 {
        0,     3,     4,     5,     6,     7,     8,    27,    28,    29,
-      30,    32,    33,    34,    35,    36,    37,    38,    45,    46,
-      47,    48,    49,    50,    51,    52,    53,    54,    56,    57,
-      58,    59,    60,    61,    62,    63,    64,    67,    69,    70,
-      40,    42,    68,    68,    56,    56,    40,    40,    40,    19,
-      19,    19,    56,     3,    40,    39,    46,     0,    47,     8,
-      13,    14,    15,    16,    17,    18,     9,    10,    11,    12,
-      26,    22,    23,    24,    25,    26,    56,    65,    43,    56,
-      42,     8,     8,    56,    56,    47,    19,    40,    56,    65,
-      66,    39,    59,    67,    69,    59,    60,    60,    60,    60,
-      61,    61,     3,    63,    63,    57,    57,    57,    57,    57,
-      57,    20,    41,    43,    56,    41,    41,    19,     4,    55,
-      21,    41,    20,    41,    56,    43,    47,    47,    56,    20,
-      41,    56,    56,    31,    19,     4,    49,    21,    47,    56,
-      56,    41,    47
+      30,    32,    33,    34,    35,    36,    37,    38,    40,    45,
+      46,    47,    48,    49,    50,    51,    52,    53,    54,    56,
+      57,    58,    59,    60,    61,    62,    63,    64,    67,    69,
+      70,    40,    42,    68,    68,    56,    56,    40,    40,    47,
+       8,     8,     8,    56,     3,    40,    39,    46,    56,     0,
+      47,     8,    13,    14,    15,    16,    17,    18,     9,    10,
+      11,    12,    26,    22,    23,    24,    25,    26,    56,    65,
+      43,    56,    42,     8,     8,    56,    56,    56,     8,    40,
+      56,    65,    66,    39,    19,    59,    67,    69,    59,    60,
+      60,    60,    60,    61,    61,     3,    63,    63,    57,    57,
+      57,    57,    57,    57,    20,    41,    43,    56,    41,    41,
+      19,     4,    55,    21,    41,    20,    41,    56,    43,    47,
+      47,    56,    20,    41,    56,    56,    31,    41,     4,    49,
+      21,    47,    47,    56
 };
 
   /* YYR1[YYN] -- Symbol number of symbol that rule YYN derives.  */
 static const yytype_uint8 yyr1[] =
 {
        0,    44,    45,    46,    46,    47,    47,    47,    47,    47,
-      47,    47,    48,    48,    49,    49,    50,    50,    51,    51,
-      52,    52,    52,    52,    53,    53,    54,    55,    55,    55,
-      56,    57,    57,    57,    57,    57,    57,    57,    58,    58,
-      58,    59,    59,    59,    59,    59,    60,    60,    60,    61,
-      61,    61,    62,    62,    63,    63,    63,    63,    63,    64,
-      64,    65,    65,    65,    66,    66,    67,    67,    68,    68,
-      68,    69,    69,    70,    70
+      47,    47,    48,    48,    48,    49,    49,    50,    50,    51,
+      51,    52,    52,    52,    52,    53,    53,    54,    55,    55,
+      55,    56,    57,    57,    57,    57,    57,    57,    57,    58,
+      58,    58,    59,    59,    59,    59,    59,    60,    60,    60,
+      61,    61,    61,    62,    62,    63,    63,    63,    63,    63,
+      64,    64,    65,    65,    65,    66,    66,    67,    67,    68,
+      68,    68,    69,    69,    70,    70
 };
 
   /* YYR2[YYN] -- Number of symbols on the right hand side of rule YYN.  */
 static const yytype_uint8 yyr2[] =
 {
        0,     2,     1,     1,     2,     1,     1,     1,     1,     1,
-       1,     1,     1,     2,     2,     3,     7,     5,     5,     9,
-       2,     2,     2,     3,     3,     3,     6,     0,     1,     3,
-       1,     1,     3,     3,     3,     3,     3,     3,     1,     3,
-       3,     1,     3,     3,     3,     3,     1,     3,     3,     1,
-       3,     3,     1,     4,     1,     1,     1,     1,     1,     4,
-       4,     0,     1,     3,     3,     5,     2,     2,     2,     3,
-       4,     1,     1,     1,     1
+       1,     1,     1,     2,     3,     2,     3,     7,     5,     5,
+       7,     2,     2,     2,     3,     3,     3,     6,     0,     1,
+       3,     1,     1,     3,     3,     3,     3,     3,     3,     1,
+       3,     3,     1,     3,     3,     3,     3,     1,     3,     3,
+       1,     3,     3,     1,     4,     1,     1,     1,     1,     1,
+       4,     4,     0,     1,     3,     3,     5,     2,     2,     2,
+       3,     4,     1,     1,     1,     1
 };
 
 
@@ -1425,25 +1425,25 @@ yyreduce:
     break;
 
   case 14:
-#line 87 "vv12lang.y" /* yacc.c:1651  */
+#line 85 "vv12lang.y" /* yacc.c:1651  */
     {
-        (yyval.statement) = vv12::Interpreter::getInp()->createStatement<vv12::BlockStm>();
-    }
+		(yyval.statement) = vv12::Interpreter::getInp()->createStatement<vv12::ExpressionStm>((yyvsp[-1].expression));
+	}
 #line 1433 "vv12lang.tab.cpp" /* yacc.c:1651  */
     break;
 
   case 15:
 #line 91 "vv12lang.y" /* yacc.c:1651  */
     {
-        (yyval.statement) = vv12::Interpreter::getInp()->createStatement<vv12::BlockStm>((yyvsp[-1].statementList));
+        (yyval.statement) = vv12::Interpreter::getInp()->createStatement<vv12::BlockStm>();
     }
 #line 1441 "vv12lang.tab.cpp" /* yacc.c:1651  */
     break;
 
   case 16:
-#line 97 "vv12lang.y" /* yacc.c:1651  */
+#line 95 "vv12lang.y" /* yacc.c:1651  */
     {
-        (yyval.statement) = vv12::Interpreter::getInp()->createStatement<vv12::IfElsStm>((yyvsp[-4].expression),(yyvsp[-2].statement),(yyvsp[0].statement));
+        (yyval.statement) = vv12::Interpreter::getInp()->createStatement<vv12::BlockStm>((yyvsp[-1].statementList));
     }
 #line 1449 "vv12lang.tab.cpp" /* yacc.c:1651  */
     break;
@@ -1451,15 +1451,15 @@ yyreduce:
   case 17:
 #line 101 "vv12lang.y" /* yacc.c:1651  */
     {
-        (yyval.statement) = vv12::Interpreter::getInp()->createStatement<vv12::IfStm>((yyvsp[-2].expression),(yyvsp[0].statement));
+        (yyval.statement) = vv12::Interpreter::getInp()->createStatement<vv12::IfElsStm>((yyvsp[-4].expression),(yyvsp[-2].statement),(yyvsp[0].statement));
     }
 #line 1457 "vv12lang.tab.cpp" /* yacc.c:1651  */
     break;
 
   case 18:
-#line 107 "vv12lang.y" /* yacc.c:1651  */
+#line 105 "vv12lang.y" /* yacc.c:1651  */
     {
-        (yyval.statement) = vv12::Interpreter::getInp()->createStatement<vv12::WhileStm>((yyvsp[-2].expression),(yyvsp[0].statement));
+        (yyval.statement) = vv12::Interpreter::getInp()->createStatement<vv12::IfStm>((yyvsp[-2].expression),(yyvsp[0].statement));
     }
 #line 1465 "vv12lang.tab.cpp" /* yacc.c:1651  */
     break;
@@ -1467,15 +1467,15 @@ yyreduce:
   case 19:
 #line 111 "vv12lang.y" /* yacc.c:1651  */
     {
-        (yyval.statement) = vv12::Interpreter::getInp()->createStatement<vv12::ForStm>((yyvsp[-6].statement),(yyvsp[-4].expression),(yyvsp[-2].expression),(yyvsp[0].statement));
+        (yyval.statement) = vv12::Interpreter::getInp()->createStatement<vv12::WhileStm>((yyvsp[-2].expression),(yyvsp[0].statement));
     }
 #line 1473 "vv12lang.tab.cpp" /* yacc.c:1651  */
     break;
 
   case 20:
-#line 117 "vv12lang.y" /* yacc.c:1651  */
+#line 115 "vv12lang.y" /* yacc.c:1651  */
     {
-        (yyval.statement) = vv12::Interpreter::getInp()->createStatement<vv12::ContinueStm>();
+        (yyval.statement) = vv12::Interpreter::getInp()->createStatement<vv12::ForStm>((yyvsp[-5].statement),(yyvsp[-4].expression),(yyvsp[-2].expression),(yyvsp[0].statement));
     }
 #line 1481 "vv12lang.tab.cpp" /* yacc.c:1651  */
     break;
@@ -1483,7 +1483,7 @@ yyreduce:
   case 21:
 #line 121 "vv12lang.y" /* yacc.c:1651  */
     {
-        (yyval.statement) = vv12::Interpreter::getInp()->createStatement<vv12::BreakStm>();
+        (yyval.statement) = vv12::Interpreter::getInp()->createStatement<vv12::ContinueStm>();
     }
 #line 1489 "vv12lang.tab.cpp" /* yacc.c:1651  */
     break;
@@ -1491,7 +1491,7 @@ yyreduce:
   case 22:
 #line 125 "vv12lang.y" /* yacc.c:1651  */
     {
-        (yyval.statement) = vv12::Interpreter::getInp()->createStatement<vv12::ReturnStm>();
+        (yyval.statement) = vv12::Interpreter::getInp()->createStatement<vv12::BreakStm>();
     }
 #line 1497 "vv12lang.tab.cpp" /* yacc.c:1651  */
     break;
@@ -1499,15 +1499,15 @@ yyreduce:
   case 23:
 #line 129 "vv12lang.y" /* yacc.c:1651  */
     {
-        (yyval.statement) = vv12::Interpreter::getInp()->createStatement<vv12::ReturnStm>((yyvsp[-1].expression));
+        (yyval.statement) = vv12::Interpreter::getInp()->createStatement<vv12::ReturnStm>();
     }
 #line 1505 "vv12lang.tab.cpp" /* yacc.c:1651  */
     break;
 
   case 24:
-#line 135 "vv12lang.y" /* yacc.c:1651  */
+#line 133 "vv12lang.y" /* yacc.c:1651  */
     {
-        (yyval.statement) = vv12::Interpreter::getInp()->createStatement<vv12::PrintStm>((yyvsp[-1].expression),true);
+        (yyval.statement) = vv12::Interpreter::getInp()->createStatement<vv12::ReturnStm>((yyvsp[-1].expression));
     }
 #line 1513 "vv12lang.tab.cpp" /* yacc.c:1651  */
     break;
@@ -1515,23 +1515,23 @@ yyreduce:
   case 25:
 #line 139 "vv12lang.y" /* yacc.c:1651  */
     {
-        (yyval.statement) = vv12::Interpreter::getInp()->createStatement<vv12::PrintStm>((yyvsp[-1].expression),false);
+        (yyval.statement) = vv12::Interpreter::getInp()->createStatement<vv12::PrintStm>((yyvsp[-1].expression),true);
     }
 #line 1521 "vv12lang.tab.cpp" /* yacc.c:1651  */
     break;
 
   case 26:
-#line 145 "vv12lang.y" /* yacc.c:1651  */
+#line 143 "vv12lang.y" /* yacc.c:1651  */
     {
-        (yyval.statement) = vv12::Interpreter::getInp()->createFunctionDefineStm((yyvsp[-4].fixedString),(yyvsp[-2].parameterList),(yyvsp[0].statement));
+        (yyval.statement) = vv12::Interpreter::getInp()->createStatement<vv12::PrintStm>((yyvsp[-1].expression),false);
     }
 #line 1529 "vv12lang.tab.cpp" /* yacc.c:1651  */
     break;
 
   case 27:
-#line 151 "vv12lang.y" /* yacc.c:1651  */
+#line 149 "vv12lang.y" /* yacc.c:1651  */
     {
-        (yyval.parameterList) = vv12::Interpreter::getInp()->createParameterList();
+        (yyval.statement) = vv12::Interpreter::getInp()->createFunctionDefineStm((yyvsp[-4].fixedString),(yyvsp[-2].parameterList),(yyvsp[0].statement));
     }
 #line 1537 "vv12lang.tab.cpp" /* yacc.c:1651  */
     break;
@@ -1539,7 +1539,7 @@ yyreduce:
   case 28:
 #line 155 "vv12lang.y" /* yacc.c:1651  */
     {
-        (yyval.parameterList) = vv12::Interpreter::getInp()->createParameterList((yyvsp[0].fixedString));
+        (yyval.parameterList) = vv12::Interpreter::getInp()->createParameterList();
     }
 #line 1545 "vv12lang.tab.cpp" /* yacc.c:1651  */
     break;
@@ -1547,15 +1547,15 @@ yyreduce:
   case 29:
 #line 159 "vv12lang.y" /* yacc.c:1651  */
     {
-        (yyval.parameterList) = vv12::Interpreter::getInp()->createParameterList((yyvsp[-2].parameterList),(yyvsp[0].fixedString));
+        (yyval.parameterList) = vv12::Interpreter::getInp()->createParameterList((yyvsp[0].fixedString));
     }
 #line 1553 "vv12lang.tab.cpp" /* yacc.c:1651  */
     break;
 
-  case 32:
-#line 169 "vv12lang.y" /* yacc.c:1651  */
+  case 30:
+#line 163 "vv12lang.y" /* yacc.c:1651  */
     {
-        (yyval.expression) = vv12::Interpreter::getInp()->createAssExp((yyvsp[-2].expression),(yyvsp[0].expression));
+        (yyval.parameterList) = vv12::Interpreter::getInp()->createParameterList((yyvsp[-2].parameterList),(yyvsp[0].fixedString));
     }
 #line 1561 "vv12lang.tab.cpp" /* yacc.c:1651  */
     break;
@@ -1563,7 +1563,7 @@ yyreduce:
   case 33:
 #line 173 "vv12lang.y" /* yacc.c:1651  */
     {
-        (yyval.expression) = vv12::Interpreter::getInp()->createAssignArrExp((yyvsp[-2].expression),(yyvsp[0].expression));
+        (yyval.expression) = vv12::Interpreter::getInp()->createAssExp((yyvsp[-2].expression),(yyvsp[0].expression));
     }
 #line 1569 "vv12lang.tab.cpp" /* yacc.c:1651  */
     break;
@@ -1571,7 +1571,7 @@ yyreduce:
   case 34:
 #line 177 "vv12lang.y" /* yacc.c:1651  */
     {
-        (yyval.expression) = vv12::Interpreter::getInp()->createToAssExp((yyvsp[-2].expression),(yyvsp[0].expression), vv12::ExpressionType::addAssExp);
+        (yyval.expression) = vv12::Interpreter::getInp()->createAssignArrExp((yyvsp[-2].expression),(yyvsp[0].expression));
     }
 #line 1577 "vv12lang.tab.cpp" /* yacc.c:1651  */
     break;
@@ -1579,7 +1579,7 @@ yyreduce:
   case 35:
 #line 181 "vv12lang.y" /* yacc.c:1651  */
     {
-        (yyval.expression) = vv12::Interpreter::getInp()->createToAssExp((yyvsp[-2].expression),(yyvsp[0].expression), vv12::ExpressionType::subAssExp);
+        (yyval.expression) = vv12::Interpreter::getInp()->createToAssExp((yyvsp[-2].expression),(yyvsp[0].expression), vv12::ExpressionType::addAssExp);
     }
 #line 1585 "vv12lang.tab.cpp" /* yacc.c:1651  */
     break;
@@ -1587,7 +1587,7 @@ yyreduce:
   case 36:
 #line 185 "vv12lang.y" /* yacc.c:1651  */
     {
-        (yyval.expression) = vv12::Interpreter::getInp()->createToAssExp((yyvsp[-2].expression),(yyvsp[0].expression), vv12::ExpressionType::mulAssExp);
+        (yyval.expression) = vv12::Interpreter::getInp()->createToAssExp((yyvsp[-2].expression),(yyvsp[0].expression), vv12::ExpressionType::subAssExp);
     }
 #line 1593 "vv12lang.tab.cpp" /* yacc.c:1651  */
     break;
@@ -1595,15 +1595,15 @@ yyreduce:
   case 37:
 #line 189 "vv12lang.y" /* yacc.c:1651  */
     {
-        (yyval.expression) = vv12::Interpreter::getInp()->createToAssExp((yyvsp[-2].expression),(yyvsp[0].expression), vv12::ExpressionType::divAssExp);
+        (yyval.expression) = vv12::Interpreter::getInp()->createToAssExp((yyvsp[-2].expression),(yyvsp[0].expression), vv12::ExpressionType::mulAssExp);
     }
 #line 1601 "vv12lang.tab.cpp" /* yacc.c:1651  */
     break;
 
-  case 39:
-#line 196 "vv12lang.y" /* yacc.c:1651  */
+  case 38:
+#line 193 "vv12lang.y" /* yacc.c:1651  */
     {
-        (yyval.expression) = vv12::Interpreter::getInp()->createRelationalExp((yyvsp[-2].expression),(yyvsp[0].expression),vv12::ExpressionType::eqExp);
+        (yyval.expression) = vv12::Interpreter::getInp()->createToAssExp((yyvsp[-2].expression),(yyvsp[0].expression), vv12::ExpressionType::divAssExp);
     }
 #line 1609 "vv12lang.tab.cpp" /* yacc.c:1651  */
     break;
@@ -1611,15 +1611,15 @@ yyreduce:
   case 40:
 #line 200 "vv12lang.y" /* yacc.c:1651  */
     {
-        (yyval.expression) = vv12::Interpreter::getInp()->createRelationalExp((yyvsp[-2].expression),(yyvsp[0].expression),vv12::ExpressionType::neExp);
+        (yyval.expression) = vv12::Interpreter::getInp()->createRelationalExp((yyvsp[-2].expression),(yyvsp[0].expression),vv12::ExpressionType::eqExp);
     }
 #line 1617 "vv12lang.tab.cpp" /* yacc.c:1651  */
     break;
 
-  case 42:
-#line 207 "vv12lang.y" /* yacc.c:1651  */
+  case 41:
+#line 204 "vv12lang.y" /* yacc.c:1651  */
     {
-        (yyval.expression) = vv12::Interpreter::getInp()->createRelationalExp((yyvsp[-2].expression),(yyvsp[0].expression),vv12::ExpressionType::ltExp);
+        (yyval.expression) = vv12::Interpreter::getInp()->createRelationalExp((yyvsp[-2].expression),(yyvsp[0].expression),vv12::ExpressionType::neExp);
     }
 #line 1625 "vv12lang.tab.cpp" /* yacc.c:1651  */
     break;
@@ -1627,7 +1627,7 @@ yyreduce:
   case 43:
 #line 211 "vv12lang.y" /* yacc.c:1651  */
     {
-        (yyval.expression) = vv12::Interpreter::getInp()->createRelationalExp((yyvsp[-2].expression),(yyvsp[0].expression),vv12::ExpressionType::gtExp);
+        (yyval.expression) = vv12::Interpreter::getInp()->createRelationalExp((yyvsp[-2].expression),(yyvsp[0].expression),vv12::ExpressionType::ltExp);
     }
 #line 1633 "vv12lang.tab.cpp" /* yacc.c:1651  */
     break;
@@ -1635,7 +1635,7 @@ yyreduce:
   case 44:
 #line 215 "vv12lang.y" /* yacc.c:1651  */
     {
-        (yyval.expression) = vv12::Interpreter::getInp()->createRelationalExp((yyvsp[-2].expression),(yyvsp[0].expression),vv12::ExpressionType::leExp);
+        (yyval.expression) = vv12::Interpreter::getInp()->createRelationalExp((yyvsp[-2].expression),(yyvsp[0].expression),vv12::ExpressionType::gtExp);
     }
 #line 1641 "vv12lang.tab.cpp" /* yacc.c:1651  */
     break;
@@ -1643,15 +1643,15 @@ yyreduce:
   case 45:
 #line 219 "vv12lang.y" /* yacc.c:1651  */
     {
-        (yyval.expression) = vv12::Interpreter::getInp()->createRelationalExp((yyvsp[-2].expression),(yyvsp[0].expression),vv12::ExpressionType::geExp);
+        (yyval.expression) = vv12::Interpreter::getInp()->createRelationalExp((yyvsp[-2].expression),(yyvsp[0].expression),vv12::ExpressionType::leExp);
     }
 #line 1649 "vv12lang.tab.cpp" /* yacc.c:1651  */
     break;
 
-  case 47:
-#line 226 "vv12lang.y" /* yacc.c:1651  */
+  case 46:
+#line 223 "vv12lang.y" /* yacc.c:1651  */
     {
-        (yyval.expression) = vv12::Interpreter::getInp()->createBinaryExp((yyvsp[-2].expression),(yyvsp[0].expression),vv12::ExpressionType::addExp);
+        (yyval.expression) = vv12::Interpreter::getInp()->createRelationalExp((yyvsp[-2].expression),(yyvsp[0].expression),vv12::ExpressionType::geExp);
     }
 #line 1657 "vv12lang.tab.cpp" /* yacc.c:1651  */
     break;
@@ -1659,15 +1659,15 @@ yyreduce:
   case 48:
 #line 230 "vv12lang.y" /* yacc.c:1651  */
     {
-        (yyval.expression) = vv12::Interpreter::getInp()->createBinaryExp((yyvsp[-2].expression),(yyvsp[0].expression),vv12::ExpressionType::subExp);
+        (yyval.expression) = vv12::Interpreter::getInp()->createBinaryExp((yyvsp[-2].expression),(yyvsp[0].expression),vv12::ExpressionType::addExp);
     }
 #line 1665 "vv12lang.tab.cpp" /* yacc.c:1651  */
     break;
 
-  case 50:
-#line 237 "vv12lang.y" /* yacc.c:1651  */
+  case 49:
+#line 234 "vv12lang.y" /* yacc.c:1651  */
     {
-        (yyval.expression) = vv12::Interpreter::getInp()->createBinaryExp((yyvsp[-2].expression),(yyvsp[0].expression),vv12::ExpressionType::mulExp);
+        (yyval.expression) = vv12::Interpreter::getInp()->createBinaryExp((yyvsp[-2].expression),(yyvsp[0].expression),vv12::ExpressionType::subExp);
     }
 #line 1673 "vv12lang.tab.cpp" /* yacc.c:1651  */
     break;
@@ -1675,31 +1675,31 @@ yyreduce:
   case 51:
 #line 241 "vv12lang.y" /* yacc.c:1651  */
     {
-        (yyval.expression) = vv12::Interpreter::getInp()->createBinaryExp((yyvsp[-2].expression),(yyvsp[0].expression),vv12::ExpressionType::divExp);
+        (yyval.expression) = vv12::Interpreter::getInp()->createBinaryExp((yyvsp[-2].expression),(yyvsp[0].expression),vv12::ExpressionType::mulExp);
     }
 #line 1681 "vv12lang.tab.cpp" /* yacc.c:1651  */
     break;
 
-  case 53:
-#line 248 "vv12lang.y" /* yacc.c:1651  */
+  case 52:
+#line 245 "vv12lang.y" /* yacc.c:1651  */
     {
-        (yyval.expression) = vv12::Interpreter::getInp()->createFunctionCallExp((yyvsp[-3].fixedString),(yyvsp[-1].argumentList));
+        (yyval.expression) = vv12::Interpreter::getInp()->createBinaryExp((yyvsp[-2].expression),(yyvsp[0].expression),vv12::ExpressionType::divExp);
     }
 #line 1689 "vv12lang.tab.cpp" /* yacc.c:1651  */
     break;
 
-  case 58:
-#line 258 "vv12lang.y" /* yacc.c:1651  */
+  case 54:
+#line 252 "vv12lang.y" /* yacc.c:1651  */
     {
-        (yyval.expression) = vv12::Interpreter::getInp()->createStringLiteralExp();
+        (yyval.expression) = vv12::Interpreter::getInp()->createFunctionCallExp((yyvsp[-3].fixedString),(yyvsp[-1].argumentList));
     }
 #line 1697 "vv12lang.tab.cpp" /* yacc.c:1651  */
     break;
 
   case 59:
-#line 264 "vv12lang.y" /* yacc.c:1651  */
+#line 262 "vv12lang.y" /* yacc.c:1651  */
     {
-        (yyval.expression) = vv12::Interpreter::getInp()->createArrayInitValueExp((yyvsp[-1].argumentList));
+        (yyval.expression) = vv12::Interpreter::getInp()->createStringLiteralExp();
     }
 #line 1705 "vv12lang.tab.cpp" /* yacc.c:1651  */
     break;
@@ -1707,15 +1707,15 @@ yyreduce:
   case 60:
 #line 268 "vv12lang.y" /* yacc.c:1651  */
     {
-        (yyval.expression) = vv12::Interpreter::getInp()->createArrayInitKeyValueExp((yyvsp[-1].arraykeyvalueList));
+        (yyval.expression) = vv12::Interpreter::getInp()->createArrayInitValueExp((yyvsp[-1].argumentList));
     }
 #line 1713 "vv12lang.tab.cpp" /* yacc.c:1651  */
     break;
 
   case 61:
-#line 274 "vv12lang.y" /* yacc.c:1651  */
+#line 272 "vv12lang.y" /* yacc.c:1651  */
     {
-        (yyval.argumentList) = vv12::Interpreter::getInp()->createArgumentList();
+        (yyval.expression) = vv12::Interpreter::getInp()->createArrayInitKeyValueExp((yyvsp[-1].arraykeyvalueList));
     }
 #line 1721 "vv12lang.tab.cpp" /* yacc.c:1651  */
     break;
@@ -1723,7 +1723,7 @@ yyreduce:
   case 62:
 #line 278 "vv12lang.y" /* yacc.c:1651  */
     {
-        (yyval.argumentList) = vv12::Interpreter::getInp()->createArgumentList((yyvsp[0].expression));
+        (yyval.argumentList) = vv12::Interpreter::getInp()->createArgumentList();
     }
 #line 1729 "vv12lang.tab.cpp" /* yacc.c:1651  */
     break;
@@ -1731,15 +1731,15 @@ yyreduce:
   case 63:
 #line 282 "vv12lang.y" /* yacc.c:1651  */
     {
-        (yyval.argumentList) = vv12::Interpreter::getInp()->createArgumentList((yyvsp[-2].argumentList),(yyvsp[0].expression));
+        (yyval.argumentList) = vv12::Interpreter::getInp()->createArgumentList((yyvsp[0].expression));
     }
 #line 1737 "vv12lang.tab.cpp" /* yacc.c:1651  */
     break;
 
   case 64:
-#line 288 "vv12lang.y" /* yacc.c:1651  */
+#line 286 "vv12lang.y" /* yacc.c:1651  */
     {
-        (yyval.arraykeyvalueList) = vv12::Interpreter::getInp()->createArrKeyValueList((yyvsp[-2].expression),(yyvsp[0].expression));
+        (yyval.argumentList) = vv12::Interpreter::getInp()->createArgumentList((yyvsp[-2].argumentList),(yyvsp[0].expression));
     }
 #line 1745 "vv12lang.tab.cpp" /* yacc.c:1651  */
     break;
@@ -1747,15 +1747,15 @@ yyreduce:
   case 65:
 #line 292 "vv12lang.y" /* yacc.c:1651  */
     {
-        (yyval.arraykeyvalueList) = vv12::Interpreter::getInp()->createArrKeyValueList((yyvsp[-4].arraykeyvalueList),(yyvsp[-2].expression),(yyvsp[0].expression));
+        (yyval.arraykeyvalueList) = vv12::Interpreter::getInp()->createArrKeyValueList((yyvsp[-2].expression),(yyvsp[0].expression));
     }
 #line 1753 "vv12lang.tab.cpp" /* yacc.c:1651  */
     break;
 
   case 66:
-#line 298 "vv12lang.y" /* yacc.c:1651  */
+#line 296 "vv12lang.y" /* yacc.c:1651  */
     {
-        (yyval.expression) = vv12::Interpreter::getInp()->createArrayExp((yyvsp[-1].fixedString),(yyvsp[0].arraykeyList),false);
+        (yyval.arraykeyvalueList) = vv12::Interpreter::getInp()->createArrKeyValueList((yyvsp[-4].arraykeyvalueList),(yyvsp[-2].expression),(yyvsp[0].expression));
     }
 #line 1761 "vv12lang.tab.cpp" /* yacc.c:1651  */
     break;
@@ -1763,15 +1763,15 @@ yyreduce:
   case 67:
 #line 302 "vv12lang.y" /* yacc.c:1651  */
     {
-        (yyval.expression) = vv12::Interpreter::getInp()->createArrayExp((yyvsp[-1].fixedString),(yyvsp[0].arraykeyList),true);
+        (yyval.expression) = vv12::Interpreter::getInp()->createArrayExp((yyvsp[-1].fixedString),(yyvsp[0].arraykeyList),false);
     }
 #line 1769 "vv12lang.tab.cpp" /* yacc.c:1651  */
     break;
 
   case 68:
-#line 308 "vv12lang.y" /* yacc.c:1651  */
+#line 306 "vv12lang.y" /* yacc.c:1651  */
     {
-        (yyval.arraykeyList) = vv12::Interpreter::getInp()->createArrKeytList();
+        (yyval.expression) = vv12::Interpreter::getInp()->createArrayExp((yyvsp[-1].fixedString),(yyvsp[0].arraykeyList),true);
     }
 #line 1777 "vv12lang.tab.cpp" /* yacc.c:1651  */
     break;
@@ -1779,7 +1779,7 @@ yyreduce:
   case 69:
 #line 312 "vv12lang.y" /* yacc.c:1651  */
     {
-        (yyval.arraykeyList) = vv12::Interpreter::getInp()->createArrKeytList((yyvsp[-1].expression));
+        (yyval.arraykeyList) = vv12::Interpreter::getInp()->createArrKeytList();
     }
 #line 1785 "vv12lang.tab.cpp" /* yacc.c:1651  */
     break;
@@ -1787,15 +1787,15 @@ yyreduce:
   case 70:
 #line 316 "vv12lang.y" /* yacc.c:1651  */
     {
-        (yyval.arraykeyList) = vv12::Interpreter::getInp()->createArrKeytList((yyvsp[-3].arraykeyList),(yyvsp[-1].expression));
+        (yyval.arraykeyList) = vv12::Interpreter::getInp()->createArrKeytList((yyvsp[-1].expression));
     }
 #line 1793 "vv12lang.tab.cpp" /* yacc.c:1651  */
     break;
 
   case 71:
-#line 322 "vv12lang.y" /* yacc.c:1651  */
+#line 320 "vv12lang.y" /* yacc.c:1651  */
     {
-        (yyval.expression) = vv12::Interpreter::getInp()->createVariableExp((yyvsp[0].fixedString),false);
+        (yyval.arraykeyList) = vv12::Interpreter::getInp()->createArrKeytList((yyvsp[-3].arraykeyList),(yyvsp[-1].expression));
     }
 #line 1801 "vv12lang.tab.cpp" /* yacc.c:1651  */
     break;
@@ -1803,15 +1803,15 @@ yyreduce:
   case 72:
 #line 326 "vv12lang.y" /* yacc.c:1651  */
     {
-        (yyval.expression) = vv12::Interpreter::getInp()->createVariableExp((yyvsp[0].fixedString),true);
+        (yyval.expression) = vv12::Interpreter::getInp()->createVariableExp((yyvsp[0].fixedString),false);
     }
 #line 1809 "vv12lang.tab.cpp" /* yacc.c:1651  */
     break;
 
   case 73:
-#line 332 "vv12lang.y" /* yacc.c:1651  */
+#line 330 "vv12lang.y" /* yacc.c:1651  */
     {
-        (yyval.expression) = (yyvsp[0].expression);
+        (yyval.expression) = vv12::Interpreter::getInp()->createVariableExp((yyvsp[0].fixedString),true);
     }
 #line 1817 "vv12lang.tab.cpp" /* yacc.c:1651  */
     break;
@@ -1824,8 +1824,16 @@ yyreduce:
 #line 1825 "vv12lang.tab.cpp" /* yacc.c:1651  */
     break;
 
+  case 75:
+#line 340 "vv12lang.y" /* yacc.c:1651  */
+    {
+        (yyval.expression) = (yyvsp[0].expression);
+    }
+#line 1833 "vv12lang.tab.cpp" /* yacc.c:1651  */
+    break;
 
-#line 1829 "vv12lang.tab.cpp" /* yacc.c:1651  */
+
+#line 1837 "vv12lang.tab.cpp" /* yacc.c:1651  */
       default: break;
     }
   /* User semantic actions sometimes alter yychar, and that requires
@@ -2053,4 +2061,4 @@ yyreturn:
 #endif
   return yyresult;
 }
-#line 340 "vv12lang.y" /* yacc.c:1910  */
+#line 344 "vv12lang.y" /* yacc.c:1910  */

@@ -2,14 +2,14 @@ func ^sample1($val){
 ecn $val
 $local = "This is func sample1"
 ecn $local
-return "sample1end";
+return "sample1end"
 }
 
 func ^sample2($val){
 ecn $val
 $local = "This is func sample2"
 ecn $local
-return "sample1end";
+return "sample1end"
 ^sample1
 }
 
@@ -22,8 +22,7 @@ world!!"
 
 ecn"-----------------------for-------------------------------"
 
-for(^i=0
-;^i<10;^i+=1){
+for(^i=0;^i<10;^i+=1){
 ecn "for sample"
 }
 
@@ -41,10 +40,10 @@ ecn"-----------------------if,ifels,break,continue------------------------------
 while(1){
 ^b += 1
 	if(^b == 10){
-		break;
+		break
 	}
 	if(^b != 8){
-		continue;
+		continue
 
 	}else{
 	ecn "This is else"

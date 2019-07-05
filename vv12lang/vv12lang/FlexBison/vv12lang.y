@@ -81,6 +81,10 @@ expression_statement
     {
         $$ = vv12::Interpreter::getInp()->createStatement<vv12::ExpressionStm>($1);
     }
+	|  LP expression SEMICOLON
+	{
+		$$ = vv12::Interpreter::getInp()->createStatement<vv12::ExpressionStm>($2);
+	}
     ;
 compound_statement
     : LC RC
@@ -107,25 +111,25 @@ iteration_statement
     {
         $$ = vv12::Interpreter::getInp()->createStatement<vv12::WhileStm>($3,$5);
     }
-	| FOR LP statement SEMICOLON expression SEMICOLON expression RP statement
+	| FOR statement expression SEMICOLON expression RP statement
     {
-        $$ = vv12::Interpreter::getInp()->createStatement<vv12::ForStm>($3,$5,$7,$9);
+        $$ = vv12::Interpreter::getInp()->createStatement<vv12::ForStm>($2,$3,$5,$7);
     }
 	;
 jump_statement
-    : CONTINUE SEMICOLON
+    : CONTINUE CRLF
     {
         $$ = vv12::Interpreter::getInp()->createStatement<vv12::ContinueStm>();
     }
-	| BREAK SEMICOLON
+	| BREAK CRLF
     {
         $$ = vv12::Interpreter::getInp()->createStatement<vv12::BreakStm>();
     }
-	| RETURN SEMICOLON
+	| RETURN CRLF
     {
         $$ = vv12::Interpreter::getInp()->createStatement<vv12::ReturnStm>();
     }
-	| RETURN  expression SEMICOLON
+	| RETURN  expression CRLF
     {
         $$ = vv12::Interpreter::getInp()->createStatement<vv12::ReturnStm>($2);
     }
